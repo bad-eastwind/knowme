@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Anwesh Kabiraj — AI Engineer & Researcher</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=clash-display@600,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070709;
+  --card: rgba(255,255,255,0.028);
+  --card-hover: rgba(255,255,255,0.052);
+  --border: rgba(255,255,255,0.06);
+  --border-bright: rgba(255,255,255,0.12);
+  --text: #f0f0f0;
+  --text-dim: #808080;
+  --text-dimmer: #3a3a3a;
+  --emerald: #10b981;
+  --emerald-dim: rgba(16,185,129,0.12);
+  --blue: #3b82f6;
+  --blue-dim: rgba(59,130,246,0.1);
+  --radius: 20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Satoshi',-apple-system,sans-serif;overflow-x:hidden;cursor:none;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;}
+
+/* CURSOR */
+#cd{position:fixed;width:7px;height:7px;background:var(--emerald);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);box-shadow:0 0 12px var(--emerald),0 0 24px rgba(16,185,129,0.25);transition:width .15s,height .15s;}
+#cr{position:fixed;width:34px;height:34px;border:1px solid rgba(16,185,129,0.35);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,background .25s;}
+body.ch #cd{width:4px;height:4px;}
+body.ch #cr{width:52px;height:52px;border-color:rgba(16,185,129,0.55);background:rgba(16,185,129,0.04);}
+
+#bgc{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;padding-top:max(20px,calc(env(safe-area-inset-top) + 12px));display:flex;align-items:center;justify-content:space-between;background:rgba(7,7,9,0.82);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border-bottom:1px solid var(--border);transition:padding .3s;}
+nav::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:rgba(7,7,9,0.82);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);z-index:1;}
+.nav-logo{font-family:'Clash Display',sans-serif;font-size:17px;font-weight:700;letter-spacing:-0.03em;}
+.nav-logo em{color:var(--emerald);font-style:normal;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:13px;color:var(--text-dim);text-decoration:none;letter-spacing:.01em;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{font-size:13px;font-weight:600;color:var(--bg);background:var(--text);padding:9px 22px;border-radius:100px;text-decoration:none;transition:opacity .2s,transform .2s;}
+.nav-cta:hover{opacity:.85;transform:scale(1.02);}
+
+/* LAYOUT */
+.wrap{position:relative;z-index:1;max-width:1360px;margin:0 auto;padding:0 48px;}
+
+/* GLASS CARD */
+.gc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:inset 0 1px 0 rgba(255,255,255,0.07),0 24px 48px rgba(0,0,0,0.5),0 1px 0 rgba(255,255,255,0.015);backdrop-filter:blur(14px);transition:background .3s,border-color .3s,transform .4s cubic-bezier(.25,.46,.45,.94),box-shadow .4s;overflow:hidden;position:relative;}
+.gc:hover{background:var(--card-hover);border-color:var(--border-bright);box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 32px 64px rgba(0,0,0,0.65),0 0 60px rgba(16,185,129,0.035);}
+
+/* SECTION */
+.s-label{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--emerald);display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.s-label::before{content:'';width:20px;height:1px;background:var(--emerald);}
+.s-title{font-family:'Clash Display',sans-serif;font-size:clamp(38px,5.5vw,70px);font-weight:700;letter-spacing:-0.04em;line-height:1.0;color:var(--text);margin-bottom:20px;}
+.s-title .d{color:var(--text-dimmer);}
+
+/* TAGS */
+.tag{font-size:12px;font-weight:600;letter-spacing:.04em;padding:5px 13px;border-radius:100px;border:1px solid var(--border-bright);color:var(--text-dim);background:rgba(255,255,255,0.02);transition:all .2s;cursor:default;}
+.tag:hover{border-color:var(--emerald);color:var(--emerald);background:var(--emerald-dim);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;text-decoration:none;padding:13px 28px;border-radius:100px;transition:all .2s;}
+.btn-p{color:var(--bg);background:var(--text);}
+.btn-p:hover{transform:scale(1.02);box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.btn-g{color:var(--text-dim);}
+.btn-g:hover{color:var(--text);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 48px 80px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);margin-bottom:36px;opacity:0;animation:fadeUp .8s .2s forwards;}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--emerald);}
+.hero-name{font-family:'Clash Display',sans-serif;font-size:clamp(58px,9.5vw,130px);font-weight:700;letter-spacing:-0.05em;line-height:.9;margin-bottom:32px;opacity:0;animation:fadeUp .8s .38s forwards;}
+.hero-name .ghost{color:#1e1e22;}
+.hero-sub{font-size:clamp(15px,1.5vw,19px);color:var(--text-dim);max-width:480px;line-height:1.7;margin-bottom:48px;opacity:0;animation:fadeUp .8s .55s forwards;}
+.hero-actions{display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp .8s .7s forwards;}
+.hero-bento{display:grid;grid-template-columns:auto auto 1fr auto;gap:12px;margin-top:72px;opacity:0;animation:fadeUp .8s 1s forwards;}
+.hb-status{padding:18px 24px;display:flex;align-items:center;gap:14px;}
+.hb-stat{padding:20px 24px;}
+.hb-role{padding:20px 28px;}
+.hb-years{padding:20px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-width:100px;}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);animation:pulse 2.2s ease-in-out infinite;flex-shrink:0;}
+.hb-num{font-family:'Clash Display',sans-serif;font-size:32px;font-weight:700;letter-spacing:-0.05em;line-height:1;}
+.hb-label{font-size:11px;color:var(--text-dim);margin-top:3px;font-weight:500;}
+
+/* ABOUT */
+#about{padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center;}
+.about-p{font-size:17px;line-height:1.8;color:var(--text-dim);margin-bottom:20px;}
+.about-p strong{color:var(--text);font-weight:600;}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
+.tl{display:flex;flex-direction:column;position:relative;padding-left:28px;}
+.tl::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:1px;background:linear-gradient(to bottom,var(--emerald),var(--blue),rgba(59,130,246,0.1),transparent);}
+.tl-item{position:relative;padding:14px 0 14px 28px;}
+.tl-item::before{content:'';position:absolute;left:-5px;top:22px;width:9px;height:9px;border-radius:50%;border:2px solid var(--emerald);background:var(--bg);box-shadow:0 0 8px rgba(16,185,129,0.3);}
+.tl-yr{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--emerald);margin-bottom:4px;}
+.tl-t{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.tl-s{font-size:13px;color:var(--text-dim);}
+
+/* RESEARCH */
+#research{padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
+.research-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.rc{padding:32px;cursor:pointer;}
+.rc-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:6px;margin-bottom:22px;}
+.rc h3{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.02em;line-height:1.25;color:var(--text);margin-bottom:12px;}
+.rc p{font-size:13px;color:var(--text-dim);line-height:1.65;margin-bottom:24px;}
+.rc-meta{display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid var(--border);}
+.rc-venue{font-size:12px;font-weight:700;color:var(--text-dim);}
+.rc-award{font-size:11px;font-weight:700;margin-top:3px;}
+.rc-cite{font-size:11px;color:var(--text-dimmer);font-weight:500;}
+
+/* EXPERIENCE */
+#experience{padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
+.exp-bento{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:16px;margin-top:48px;}
+.ec{padding:36px;cursor:pointer;}
+.ec.feat{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;min-height:400px;}
+.ec-logo{font-family:'Clash Display',sans-serif;font-size:24px;font-weight:700;letter-spacing:-0.03em;color:var(--text);margin-bottom:6px;}
+.ec-role{font-size:13px;font-weight:600;color:var(--emerald);margin-bottom:20px;}
+.ec-desc{font-size:14.5px;color:var(--text-dim);line-height:1.7;}
+.ec-metrics{display:flex;gap:28px;padding-top:24px;margin-top:24px;border-top:1px solid var(--border);}
+.ec-mv{font-family:'Clash Display',sans-serif;font-size:30px;font-weight:700;letter-spacing:-0.04em;}
+.ec-ml{font-size:12px;color:var(--text-dim);margin-top:2px;}
+.ec-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}
+
+/* PUBLICATIONS sub-row */
+.conf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;}
+
+/* PROJECTS */
+#projects{padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
+.pb{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:220px;gap:14px;margin-top:48px;}
+.pc{padding:28px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;}
+.pc:nth-child(1){grid-column:span 5;grid-row:span 2;}
+.pc:nth-child(2){grid-column:span 4;}
+.pc:nth-child(3){grid-column:span 3;}
+.pc:nth-child(4){grid-column:span 4;}
+.pc:nth-child(5){grid-column:span 3;}
+.pc:nth-child(6){grid-column:span 4;}
+.pc-glow{position:absolute;inset:0;pointer-events:none;border-radius:var(--radius);}
+.pc-num{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--text-dimmer);text-transform:uppercase;}
+.pc-name{font-family:'Clash Display',sans-serif;font-size:clamp(16px,1.8vw,21px);font-weight:700;letter-spacing:-0.025em;color:var(--text);margin:10px 0 8px;line-height:1.2;}
+.pc-desc{font-size:13px;color:var(--text-dim);line-height:1.55;}
+.pc-tech{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px;}
+.pc-tech span{font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--text-dimmer);border:1px solid var(--border);padding:3px 7px;border-radius:4px;}
+.pc-arrow{position:absolute;top:24px;right:24px;width:30px;height:30px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:13px;opacity:0;transition:all .2s;}
+.pc:hover .pc-arrow{opacity:1;border-color:var(--emerald);color:var(--emerald);}
+
+/* SKILLS */
+#skills{padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
+#skillc{width:100%;height:520px;display:block;border-radius:var(--radius);}
+
+/* RECOGNITION */
+#recognition{padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
+.rec-bento{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:180px;gap:12px;margin-top:48px;}
+.rb{border-radius:var(--radius);overflow:hidden;cursor:default;position:relative;}
+.rb:nth-child(1){grid-column:span 5;grid-row:span 2;}
+.rb:nth-child(2){grid-column:span 4;}
+.rb:nth-child(3){grid-column:span 3;}
+.rb:nth-child(4){grid-column:span 3;grid-row:span 2;}
+.rb:nth-child(5){grid-column:span 4;}
+.rb:nth-child(6){grid-column:span 5;}
+.rb-inner{width:100%;height:100%;padding:28px;display:flex;flex-direction:column;justify-content:space-between;}
+
+/* CONTACT */
+#contact{padding:120px 48px;max-width:1360px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+.contact-email{display:inline-block;font-family:'Clash Display',sans-serif;font-size:clamp(24px,4.5vw,64px);font-weight:700;letter-spacing:-0.04em;color:var(--text);text-decoration:none;transition:color .25s;margin:20px 0 32px;}
+.contact-email:hover{color:var(--emerald);}
+.contact-links{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:40px;}
+.contact-link{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--text-dim);text-decoration:none;padding:10px 20px;border:1px solid var(--border);border-radius:100px;transition:all .2s;}
+.contact-link:hover{color:var(--text);border-color:var(--border-bright);}
+
+footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;max-width:1360px;margin:0 auto;}
+.fc{font-size:12px;color:var(--text-dimmer);}
+.div-line{max-width:1360px;margin:0 auto;padding:0 48px;position:relative;z-index:1;}
+.div-line hr{border:none;border-top:1px solid var(--border);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(18px,-18px) scale(1.03);}66%{transform:translate(-12px,14px) scale(0.97);}}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px var(--emerald);}50%{box-shadow:0 0 20px var(--emerald),0 0 40px rgba(16,185,129,0.3);}}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
+.reveal.v{opacity:1;transform:translateY(0);}
+
+@media(max-width:960px){
+  nav{padding:16px 20px !important;}
+  .nav-links,.nav-cta{display:none;}
+  #hero,#about,#research,#experience,#projects,#skills,#recognition,#contact{padding:60px 20px;}
+  #about{grid-template-columns:1fr;gap:48px;}
+  .research-grid,.conf-grid{grid-template-columns:1fr;}
+  .exp-bento{grid-template-columns:1fr;}
+  .ec.feat{min-height:auto;}
+  .pb{grid-template-columns:1fr;grid-auto-rows:auto;}
+  .pc:nth-child(n){grid-column:span 1;grid-row:span 1;min-height:200px;}
+  .rec-bento{grid-template-columns:repeat(2,1fr);}
+  .rb:nth-child(n){grid-column:span 1;grid-row:span 1;}
+  .hero-bento{grid-template-columns:1fr 1fr;}
+  footer{padding:20px;flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bgc"></canvas>
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">AK<em>.</em></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#photography">Photography</a></li>
+    <li><a href="#recognition">Recognition</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:anweshkabiraj@icloud.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-eyebrow">AI Engineer &amp; Applied Researcher · Kolkata, India</div>
+
+  <h1 class="hero-name">
+    <span class="name-word">Anwesh</span><br><span class="name-word ghost">Kabiraj</span>
+  </h1>
+
+  <p class="hero-sub">
+    Building explainable, scalable AI systems — from frontier research to real-world deployment. Specialising in medical image analysis, multimodal AI, and production LLM systems.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#research" class="btn btn-p">
+      View Research
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#contact" class="btn btn-g">Say hello →</a>
+  </div>
+
+  <div class="hero-bento">
+    <div class="gc hb-status">
+      <div class="sdot"></div>
+      <div>
+        <div style="font-size:13px;font-weight:600">Open to Opportunities</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:2px">Research · Engineering</div>
+      </div>
+    </div>
+    <div class="gc hb-stat">
+      <div class="hb-num">6</div>
+      <div class="hb-label">Publications</div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+        <span style="font-size:9px;font-weight:700;color:var(--text-dimmer);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">IEEE</span>
+        <span style="font-size:9px;font-weight:700;color:var(--text-dimmer);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">Springer</span>
+        <span style="font-size:9px;font-weight:700;color:var(--text-dimmer);border:1px solid var(--border);padding:2px 6px;border-radius:4px;">Elsevier</span>
+      </div>
+    </div>
+    <div class="gc hb-role">
+      <div style="font-size:11px;color:var(--text-dimmer);font-weight:700;letter-spacing:.1em;margin-bottom:8px">CURRENTLY</div>
+      <div style="font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.03em">AI Engineer / Researcher</div>
+      <div style="font-size:13px;color:var(--emerald);font-weight:700;margin-top:4px">@ TCS Innovation Labs</div>
+      <div style="font-size:13px;color:var(--text-dim);margin-top:10px;line-height:1.55">Medical AI · LLM Systems · Computer Vision</div>
+    </div>
+    <div class="gc hb-years" style="position:relative;overflow:hidden;min-width:90px">
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(16,185,129,0.18),rgba(59,130,246,0.08),transparent 70%);animation:orbFloat 7s ease-in-out infinite"></div>
+      <div style="position:relative;text-align:center">
+        <div style="font-family:'Clash Display',sans-serif;font-size:36px;font-weight:700;letter-spacing:-0.05em">3+</div>
+        <div style="font-size:10px;color:var(--text-dim);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:2px">Years</div>
+        <div style="font-size:9px;color:var(--text-dimmer);margin-top:6px;font-weight:600">2 Patents<br>Pending</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-line"><hr></div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="reveal">
+    <div class="s-label">About</div>
+    <h2 class="s-title">Research<br>meets<br><span class="d">production</span></h2>
+    <p class="about-p">I'm an AI Engineer and applied researcher at <strong>TCS Innovation Labs</strong> with 3+ years of experience translating novel architectures from research papers into systems that actually ship at scale.</p>
+    <p class="about-p">My work spans <strong>medical image analysis</strong>, weakly supervised deep learning, <strong>production LLM systems</strong>, generative models, and edge AI. Six peer-reviewed publications across IEEE, Springer, and Elsevier — with two works currently under <strong>patent evaluation</strong>.</p>
+    <p class="about-p">I care deeply about building AI that is explainable, efficient, and genuinely useful — not just benchmark-optimised.</p>
+    <div class="about-tags">
+      <span class="tag">Medical Image Analysis</span>
+      <span class="tag">Computer Vision</span>
+      <span class="tag">LLM Systems</span>
+      <span class="tag">RAG Pipelines</span>
+      <span class="tag">Agentic AI</span>
+      <span class="tag">PyTorch</span>
+      <span class="tag">Semantic Segmentation</span>
+      <span class="tag">NLP / NER</span>
+      <span class="tag">Edge AI</span>
+      <span class="tag">Generative Models</span>
+      <span class="tag">MLOps</span>
+      <span class="tag">Biometrics</span>
+    </div>
+  </div>
+  <div class="reveal" style="transition-delay:.12s">
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-yr">Oct 2022 — Present</div>
+        <div class="tl-t">AI Engineer / Researcher · TCS Innovation Labs</div>
+        <div class="tl-s">GenAI · Computer Vision · Biometrics · NLP · Edge AI</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-yr">2018 — 2022</div>
+        <div class="tl-t">B.Tech in Information Technology</div>
+        <div class="tl-s">Govt. College of Engineering & Leather Technology, Kolkata · CGPA 8.5/10</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-yr">2015 — 2017</div>
+        <div class="tl-t">Higher Secondary (Pure Science)</div>
+        <div class="tl-s">Hem Sheela Model School, Durgapur · CBSE · CGPA 8.0/10</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-yr">2015</div>
+        <div class="tl-t">Secondary (Class X)</div>
+        <div class="tl-s">Aurobindo Vidyamandir, Durgapur · ICSE · 92%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-line"><hr></div>
+
+<!-- ══════════ EXPERIENCE ══════════ -->
+<section id="experience">
+  <div class="reveal">
+    <div class="s-label">Experience</div>
+    <h2 class="s-title">TCS Innovation<br><span class="d">Labs</span></h2>
+  </div>
+
+  <div class="exp-bento reveal" style="transition-delay:.1s">
+
+    <div class="gc ec feat">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div style="width:34px;height:34px;background:linear-gradient(135deg,#0070f3,#00b4d8);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <span style="font-size:13px;font-weight:900;color:#fff">TCS</span>
+          </div>
+          <div class="ec-logo" style="margin-bottom:0">Tata Consultancy Services</div>
+        </div>
+        <div class="ec-role">AI Engineer / Researcher, Innovation Labs · Oct 2022 – Present · Kolkata</div>
+        <p class="ec-desc">Working across the full AI stack — from publishing novel architectures in top-tier venues to deploying them in production systems used by millions. Key focus areas: generative AI pipelines, medical computer vision, biometric identity systems, NLP, and edge AI. Two works under patent evaluation at TCS (2026).</p>
+        <div class="ec-tags">
+          <span class="tag">PyTorch</span><span class="tag">LLM Systems</span>
+          <span class="tag">RAG</span><span class="tag">Computer Vision</span>
+          <span class="tag">Biometrics</span><span class="tag">Edge AI</span>
+          <span class="tag">FastAPI</span><span class="tag">React</span>
+        </div>
+      </div>
+      <div>
+        <div class="ec-metrics">
+          <div>
+            <div class="ec-mv" style="color:var(--emerald)">6</div>
+            <div class="ec-ml">Publications</div>
+          </div>
+          <div>
+            <div class="ec-mv">2</div>
+            <div class="ec-ml">Patents pending</div>
+          </div>
+          <div>
+            <div class="ec-mv">18×</div>
+            <div class="ec-ml">Latency reduction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gc ec">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--emerald);text-transform:uppercase;margin-bottom:12px">Generative AI & LLMs</div>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.65">Architected an enterprise Hybrid RAG pipeline for Passport Seva policy intelligence using <strong style="color:var(--text)">GPT-5.4 Pro / DeepSeek-V3</strong>, NV-Embed-v2 embeddings, Qdrant vector DB, and Qwen3-Reranker-8B. Integrated Lakera Guard, FSDP2, and vLLM PagedAttention for production-grade GenAI.</p>
+      <div style="margin-top:16px;font-size:12px;font-weight:600;color:var(--text-dimmer)">Built agentic form automation: RAG → LLM → JSON → React Hook Form</div>
+    </div>
+
+    <div class="gc ec">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--blue);text-transform:uppercase;margin-bottom:12px">Biometric Systems</div>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.65">Integrated multimodal biometrics (fingerprint, signature, facial) into <strong style="color:var(--text)">Passport Seva</strong> with UIDAI/Aadhaar real-time auth. Built <strong style="color:var(--text)">DigiYatra</strong> facial recognition for seamless airport check-in with biometric tokenization at scale.</p>
+    </div>
+
+    <div class="gc ec" style="background:var(--emerald-dim);border-color:rgba(16,185,129,0.18)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--emerald);text-transform:uppercase;margin-bottom:12px">⚗ Patent-Track CV & NLP</div>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.65"><strong style="color:var(--text)">Segmentation:</strong> Lightweight encoder-decoder with boundary-aware loss · 91% mIoU · generalised to 3 domains<br><br><strong style="color:var(--text)">NER Pipeline:</strong> SpaCy on 120K+ logistics docs · 89% F1 · 180ms → 10ms (18× via quantization + x86 export)</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="div-line"><hr></div>
+
+<!-- ══════════ RESEARCH ══════════ -->
+<section id="research">
+  <div class="reveal">
+    <div class="s-label">Research</div>
+    <h2 class="s-title">6 Peer-Reviewed<br><span class="d">Publications</span></h2>
+    <p style="font-size:14px;color:var(--text-dimmer);margin-top:8px">IEEE · Springer · Elsevier</p>
+  </div>
+
+  <!-- Journal Articles -->
+  <div style="margin-top:48px" class="reveal" style="transition-delay:.08s">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dimmer);margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="width:16px;height:1px;background:var(--text-dimmer);display:inline-block"></span>Journal Articles
+    </div>
+    <div class="research-grid">
+
+      <div class="gc rc">
+        <div class="rc-badge" style="color:var(--emerald);background:var(--emerald-dim)">
+          <svg width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+          Medical AI
+        </div>
+        <h3>CAPCAM: Weakly Supervised Multi-Disease Detection & Localization from Thoracic X-Rays</h3>
+        <p>Proposed a novel Confidence-Aware Probabilistic Class Activation Map architecture for multi-disease localization in chest X-rays without annotated labels. Achieved 94% IoBB and 90% Dice score across 13 thoracic diseases on NIH and Stanford CheXpert datasets.</p>
+        <div class="rc-meta">
+          <div>
+            <div class="rc-venue">Elsevier — Biomedical Signal Processing & Control</div>
+            <div class="rc-award" style="color:var(--emerald)">2024 · Journal</div>
+          </div>
+          <div class="rc-cite">94% IoBB</div>
+        </div>
+      </div>
+
+      <div class="gc rc">
+        <div class="rc-badge" style="color:var(--blue);background:var(--blue-dim)">
+          <svg width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+          Medical AI
+        </div>
+        <h3>CX-Ultranet: Multi-Thoracic Disease Detection via EfficientNet Compound Scaling</h3>
+        <p>Designed CX-Ultranet with channel shuffling, skip connections, and multiclass cross-entropy loss for simultaneous classification of 13 thoracic disorders. Outperformed SOTA models by up to 15% with 30% less training time.</p>
+        <div class="rc-meta">
+          <div>
+            <div class="rc-venue">Springer — Health and Technology, Vol. 14</div>
+            <div class="rc-award" style="color:var(--blue)">2024 · Journal</div>
+          </div>
+          <div class="rc-cite">88% avg. accuracy</div>
+        </div>
+      </div>
+
+      <div class="gc rc">
+        <div class="rc-badge" style="color:#a855f7;background:rgba(168,85,247,0.1)">
+          <svg width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+          Computer Vision
+        </div>
+        <h3>SRGAN-Based Number Plate Recognition from Super-Resolved Degraded Images</h3>
+        <p>Modified SRGAN with Residual-in-Residual Dense Blocks (RRDB) for license plate super-resolution integrated with an OCR pipeline. Improved character detection accuracy from 4–6% to 84–90% on severely degraded images.</p>
+        <div class="rc-meta">
+          <div>
+            <div class="rc-venue">Springer — Multimedia Tools & Applications, Vol. 82</div>
+            <div class="rc-award" style="color:#a855f7">2023 · Journal</div>
+          </div>
+          <div class="rc-cite">84–90% accuracy</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Conference Papers -->
+  <div style="margin-top:40px" class="reveal" style="transition-delay:.16s">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dimmer);margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="width:16px;height:1px;background:var(--text-dimmer);display:inline-block"></span>Conference Proceedings
+    </div>
+    <div class="conf-grid">
+
+      <div class="gc rc" style="padding:24px">
+        <div class="rc-badge" style="color:var(--emerald);background:var(--emerald-dim)">
+          <svg width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+          Medical AI
+        </div>
+        <h3 style="font-size:15px">Weakly Supervised Confidence Aware Probabilistic CAM for Thorax Anomaly Localization</h3>
+        <p style="font-size:12px">Early framework combining CAN and ADN for weakly supervised anomaly localization on large-scale CXR benchmarks. Extended into full CAPCAM journal paper.</p>
+        <div class="rc-meta">
+          <div><div class="rc-venue">IEEE IRI 2023</div><div class="rc-award" style="color:var(--emerald)">pp. 309–314</div></div>
+        </div>
+      </div>
+
+      <div class="gc rc" style="padding:24px">
+        <div class="rc-badge" style="color:var(--blue);background:var(--blue-dim)">
+          <svg width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+          Medical AI
+        </div>
+        <h3 style="font-size:15px">Detection & Classification of Lung Disease via Deep Learning from X-Ray Images</h3>
+        <p style="font-size:12px">Original CX-Ultranet architecture for 13-class thoracic disease classification. 88% accuracy with significantly reduced FLOPs; foundation for the extended journal paper.</p>
+        <div class="rc-meta">
+          <div><div class="rc-venue">Springer ISVC 2022</div><div class="rc-award" style="color:var(--blue)">LNCS Vol. 13598</div></div>
+        </div>
+      </div>
+
+      <div class="gc rc" style="padding:24px">
+        <div class="rc-badge" style="color:#f59e0b;background:rgba(245,158,11,0.1)">
+          <svg width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+          Epidemiology
+        </div>
+        <h3 style="font-size:15px">How Successful is a Lockdown During a Pandemic?</h3>
+        <p style="font-size:12px">Applied SIRD epidemiological modelling to COVID-19 data from 37 US states. Demonstrated hard lockdown followed by disciplined soft lockdown significantly curbs R₀.</p>
+        <div class="rc-meta">
+          <div><div class="rc-venue">IEEE INDICON 2020</div><div class="rc-award" style="color:#f59e0b">37 US States</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="div-line"><hr></div>
+
+<!-- ══════════ PROJECTS ══════════ -->
+<section id="projects">
+  <div class="reveal">
+    <div class="s-label">Projects</div>
+    <h2 class="s-title">Selected<br><span class="d">Builds</span></h2>
+  </div>
+  <div class="pb reveal" style="transition-delay:.1s">
+
+    <div class="gc pc">
+      <div class="pc-glow" style="background:radial-gradient(circle at 75% 25%,rgba(16,185,129,0.15),transparent 55%)"></div>
+      <div>
+        <div class="pc-num">01 / Featured</div>
+        <div class="pc-name">Hybrid RAG · Passport Seva Intelligence</div>
+        <p class="pc-desc">Enterprise-grade policy Q&A system. Contextual semantic chunking, metadata-aware retrieval, Qwen3-Reranker-8B reranking. Integrated Lakera Guard (prompt injection) + vLLM PagedAttention for low-latency production deployment. Significantly reduced hallucinations in long-context policy queries.</p>
+      </div>
+      <div>
+        <div class="pc-tech"><span>GPT-5.4 Pro</span><span>DeepSeek-V3</span><span>Qdrant</span><span>NV-Embed-v2</span><span>LangGraph</span></div>
+        <div style="font-size:12px;color:var(--emerald);font-weight:700;margin-top:12px">⚡ Production @ TCS · Govt. Platform</div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+    <div class="gc pc">
+      <div class="pc-glow" style="background:radial-gradient(circle at 20% 80%,rgba(59,130,246,0.12),transparent 55%)"></div>
+      <div>
+        <div class="pc-num">02</div>
+        <div class="pc-name">CAPCAM — Chest X-Ray AI</div>
+        <p class="pc-desc">Weakly supervised multi-disease localization across 13 thoracic pathologies. 94% IoBB, 90% Dice on NIH + CheXpert. Published in Elsevier BSPC 2024.</p>
+      </div>
+      <div class="pc-tech"><span>PyTorch</span><span>CAM</span><span>Saliency Maps</span></div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+    <div class="gc pc">
+      <div class="pc-glow" style="background:radial-gradient(circle at 50% 50%,rgba(168,85,247,0.1),transparent 55%)"></div>
+      <div>
+        <div class="pc-num">03</div>
+        <div class="pc-name">DigiYatra Biometrics</div>
+        <p class="pc-desc">Facial recognition for airport check-in. Biometric tokenization with cross-verification against Aadhaar/UIDAI at scale. Reduced manual verification overhead significantly.</p>
+      </div>
+      <div class="pc-tech"><span>OpenCV</span><span>UIDAI API</span><span>FastAPI</span></div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+    <div class="gc pc">
+      <div class="pc-glow" style="background:radial-gradient(circle at 80% 20%,rgba(245,158,11,0.1),transparent 55%)"></div>
+      <div>
+        <div class="pc-num">04 / Patent</div>
+        <div class="pc-name">Edge NER Pipeline</div>
+        <p class="pc-desc">SpaCy NER trained on 120K+ logistics documents. 89% F1 across 8 entity types. Quantized for x86 edge: 180ms → 10ms inference. Eliminates cloud API dependency.</p>
+      </div>
+      <div class="pc-tech"><span>SpaCy</span><span>Quantization</span><span>x86 Export</span></div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+    <div class="gc pc">
+      <div>
+        <div class="pc-num">05 / Patent</div>
+        <div class="pc-name">Facial Segmentation</div>
+        <p class="pc-desc">Lightweight encoder-decoder with boundary-aware loss. 91% mIoU on facial benchmarks, generalised across 3 additional domains.</p>
+      </div>
+      <div class="pc-tech"><span>PyTorch</span><span>Custom Loss</span><span>Segmentation</span></div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+    <div class="gc pc">
+      <div>
+        <div class="pc-num">06</div>
+        <div class="pc-name">SARIMA Billing Forecaster</div>
+        <p class="pc-desc">10+ years of billing data. Real-time anomaly monitoring with tiered alerting (10L early warning / 50L critical) for enterprise-scale financial deviation detection.</p>
+      </div>
+      <div class="pc-tech"><span>SARIMA</span><span>Time Series</span><span>Anomaly Detection</span></div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="div-line"><hr></div>
+
+<!-- ══════════ SKILLS CONSTELLATION ══════════ -->
+<section id="skills">
+  <div class="reveal">
+    <div class="s-label">Skills</div>
+    <h2 class="s-title">Capabilities<br><span class="d">&amp; Expertise</span></h2>
+    <p style="font-size:14px;color:var(--text-dimmer);margin-top:12px">Hover nodes to explore</p>
+  </div>
+  <div class="gc reveal" style="margin-top:40px;padding:0;overflow:hidden;transition-delay:.1s">
+    <canvas id="skillc"></canvas>
+  </div>
+</section>
+
+<div class="div-line"><hr></div>
+
+<!-- ══════════ PHOTOGRAPHY ══════════ -->
+<section id="photography" style="padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;">
+  <div class="reveal">
+    <div class="s-label">Photography</div>
+    <h2 class="s-title">Through<br><span class="d">the lens</span></h2>
+    <p style="font-size:14px;color:var(--text-dimmer);margin-top:8px">Personal collection — travels & moments</p>
+  </div>
+
+  <div class="reveal" style="transition-delay:.1s;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:200px;gap:12px;margin-top:48px;">
+
+    <!-- Slot 1 — large, replace bg color / src with your photo -->
+    <div style="grid-column:span 5;grid-row:span 2;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1f14,#091510,#05100a);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
+        <!-- Replace the div above with: <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);"> -->
+        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+      </div>
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:20px;">
+        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+      </div>
+    </div>
+
+    <!-- Slot 2 -->
+    <div style="grid-column:span 4;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d0f1f,#080a18,#050610);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
+        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+      </div>
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+      </div>
+    </div>
+
+    <!-- Slot 3 -->
+    <div style="grid-column:span 3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0f0a,#120a06,#0a0604);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
+        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+      </div>
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+      </div>
+    </div>
+
+    <!-- Slot 4 — tall -->
+    <div style="grid-column:span 3;grid-row:span 2;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a1a1a,#061212,#030a0a);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
+        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+      </div>
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+      </div>
+    </div>
+
+    <!-- Slot 5 -->
+    <div style="grid-column:span 4;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1508,#120f05,#0a0a04);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
+        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+      </div>
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+      </div>
+    </div>
+
+    <!-- Slot 6 -->
+    <div style="grid-column:span 5;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#141418,#0e0e12,#08080c);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
+        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+      </div>
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+// Photo hover parallax — runs once DOM is ready
+document.querySelectorAll('#photography .ph-bg').forEach(bg => {
+  const wrap = bg.parentElement;
+  wrap.addEventListener('mouseenter', () => bg.style.transform = 'scale(1.06)');
+  wrap.addEventListener('mouseleave', () => bg.style.transform = 'scale(1)');
+  const ov = wrap.querySelector('.ph-ov');
+  if (ov) {
+    wrap.addEventListener('mouseenter', () => ov.style.opacity = '1');
+    wrap.addEventListener('mouseleave', () => ov.style.opacity = '0');
+  }
+});
+</script>
+
+<div class="div-line"><hr></div>
+
+<!-- ══════════ RECOGNITION & PATENTS ══════════ -->
+<section id="recognition">
+  <div class="reveal">
+    <div class="s-label">Recognition</div>
+    <h2 class="s-title">Patents &amp;<br><span class="d">Honours</span></h2>
+  </div>
+
+  <div class="rec-bento reveal" style="transition-delay:.1s">
+
+    <!-- Patent 1 — large -->
+    <div class="rb gc">
+      <div class="rb-inner" style="justify-content:flex-start;gap:16px">
+        <div>
+          <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);margin-bottom:10px">⚗ Patent Under Evaluation · TCS 2026</div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.025em;line-height:1.2;color:var(--text)">Lightweight Encoder-Decoder Segmentation Architecture</div>
+        </div>
+        <p style="font-size:13px;color:var(--text-dim);line-height:1.6">Custom boundary-aware loss function · 91% mIoU on facial region benchmarks · Generalised across 3 additional segmentation domains beyond the original task</p>
+        <div style="display:flex;gap:16px;padding-top:16px;border-top:1px solid var(--border)">
+          <div>
+            <div style="font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700;color:var(--emerald)">91%</div>
+            <div style="font-size:11px;color:var(--text-dim)">mIoU</div>
+          </div>
+          <div>
+            <div style="font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700">3+</div>
+            <div style="font-size:11px;color:var(--text-dim)">Domains</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NSTSE Gold -->
+    <div class="rb gc" style="background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.14)">
+      <div class="rb-inner">
+        <div>
+          <div style="font-size:28px;margin-bottom:10px">🥇</div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.25">Two-time Gold Medallist</div>
+        </div>
+        <div style="font-size:13px;color:var(--text-dim)">National Science Talent Search Examination (NSTSE) — Class 7 & Class 9</div>
+      </div>
+    </div>
+
+    <!-- IBM Wall of Fame -->
+    <div class="rb gc" style="background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.14)">
+      <div class="rb-inner">
+        <div>
+          <div style="font-size:22px;margin-bottom:10px">🏛</div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.25">IBM Wall of Fame 2020</div>
+        </div>
+        <div style="font-size:13px;color:var(--text-dim)">IBM Master the Mainframe · Top 100 global finishers · Featured on official IBM Wall of Fame</div>
+      </div>
+    </div>
+
+    <!-- Patent 2 — spans 2 rows -->
+    <div class="rb gc">
+      <div class="rb-inner" style="justify-content:flex-start;gap:16px">
+        <div>
+          <div style="font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);margin-bottom:10px">⚗ Patent Under Evaluation · TCS 2026</div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.02em;line-height:1.2;color:var(--text)">Edge-Optimised SpaCy NER Pipeline</div>
+        </div>
+        <p style="font-size:13px;color:var(--text-dim);line-height:1.6">Trained on 120K+ annotated logistics documents · 89% F1 across 8 entity types · Quantized & exported to x86 edge hardware</p>
+        <div style="display:flex;gap:16px;padding-top:16px;border-top:1px solid var(--border)">
+          <div>
+            <div style="font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700;color:var(--emerald)">18×</div>
+            <div style="font-size:11px;color:var(--text-dim)">Latency reduction</div>
+          </div>
+          <div>
+            <div style="font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700">89%</div>
+            <div style="font-size:11px;color:var(--text-dim)">F1 Score</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publications stat -->
+    <div class="rb gc" style="background:var(--emerald-dim);border-color:rgba(16,185,129,0.2)">
+      <div class="rb-inner">
+        <div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:54px;font-weight:700;letter-spacing:-0.05em;color:var(--emerald);line-height:1">6</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);margin-top:4px">Publications</div>
+        </div>
+        <div style="font-size:12px;color:var(--text-dim)">IEEE · Springer · Elsevier · 2020–2024</div>
+      </div>
+    </div>
+
+    <!-- Experience stat -->
+    <div class="rb gc">
+      <div class="rb-inner">
+        <div>
+          <div style="font-family:'Clash Display',sans-serif;font-size:48px;font-weight:700;letter-spacing:-0.05em;color:var(--text);line-height:1">3+</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);margin-top:4px">Years at TCS</div>
+        </div>
+        <div style="font-size:12px;color:var(--text-dim)">Innovation Labs · Research → Production</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="div-line"><hr></div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="reveal">
+    <div class="s-label" style="justify-content:center">Contact</div>
+    <p style="font-size:clamp(16px,2vw,22px);color:var(--text-dim);font-weight:400;margin-bottom:12px">Interested in collaboration or research opportunities?</p>
+    <a href="mailto:anweshkabiraj@icloud.com" class="contact-email">anweshkabiraj@icloud.com</a>
+    <p style="font-size:15px;color:var(--text-dim);max-width:500px;margin:0 auto 16px;line-height:1.65">
+      Open to research collaborations, AI engineering roles, and applied ML consulting engagements.
+    </p>
+    <p style="font-size:14px;color:var(--text-dimmer)">📍 Kolkata, India · +91 89670 87246</p>
+    <div class="contact-links">
+      <a href="#" class="contact-link">GitHub</a>
+      <a href="#" class="contact-link">Google Scholar</a>
+      <a href="#" class="contact-link">LinkedIn</a>
+      <a href="#" class="contact-link">Download CV ↓</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fc">© 2024 Anwesh Kabiraj · Kolkata, India</div>
+  <div class="fc">AI Engineer & Applied Researcher · TCS Innovation Labs</div>
+</footer>
+
+<script>
+/* ════ BACKGROUND ════ */
+const bgc=document.getElementById('bgc'),bx=bgc.getContext('2d');
+let bW,bH;
+function resizeBg(){bW=bgc.width=window.innerWidth;bH=bgc.height=window.innerHeight;}
+resizeBg();window.addEventListener('resize',resizeBg);
+const pts=Array.from({length:90},()=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,r:Math.random()*1.2+.3,a:Math.random()*.35+.05,life:Math.random()*400,max:Math.random()*350+200}));
+let gA=0;
+function drawBg(){
+  bx.clearRect(0,0,bW,bH);gA+=.0015;
+  [[.28,.28,'#10b981',.038],[.72,.65,'#3b82f6',.025],[.5,.8,'#a855f7',.018]].forEach(([fx,fy,c,o])=>{
+    const cx=bW*(fx+Math.cos(gA)*0.12),cy=bH*(fy+Math.sin(gA+1)*0.1);
+    const g=bx.createRadialGradient(cx,cy,0,cx,cy,bW*.38);
+    g.addColorStop(0,c+(Math.round(o*255).toString(16).padStart(2,'0')));g.addColorStop(1,'transparent');
+    bx.fillStyle=g;bx.fillRect(0,0,bW,bH);
+  });
+  pts.forEach(p=>{
+    p.x+=p.vx/bW;p.y+=p.vy/bH;p.life++;
+    if(p.x<0||p.x>1)p.vx*=-1;if(p.y<0||p.y>1)p.vy*=-1;
+    if(p.life>p.max){p.life=0;p.max=Math.random()*350+200;}
+    const prog=p.life/p.max;const a=p.a*(prog<.1?prog*10:prog>.9?(1-prog)*10:1);
+    bx.beginPath();bx.arc(p.x*bW,p.y*bH,p.r,0,Math.PI*2);bx.fillStyle=`rgba(255,255,255,${a})`;bx.fill();
+  });
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+/* ════ CURSOR ════ */
+const dotEl=document.getElementById('cd'),ringEl=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dotEl.style.left=mx+'px';dotEl.style.top=my+'px';});
+(function lerpRing(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;ringEl.style.left=rx+'px';ringEl.style.top=ry+'px';requestAnimationFrame(lerpRing);})();
+document.querySelectorAll('a,button,.gc,.pc,.rc,.ec,.rb').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+});
+
+/* ════ SCROLL REVEAL ════ */
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v');});},{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ════ 3D TILT ════ */
+document.querySelectorAll('.gc').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const dx=(e.clientX-r.left-r.width/2)/(r.width/2);
+    const dy=(e.clientY-r.top-r.height/2)/(r.height/2);
+    card.style.transform=`perspective(1200px) rotateX(${-dy*3.5}deg) rotateY(${dx*3.5}deg) translateY(-3px) scale(1.012)`;
+    card.style.transition='transform .08s ease';
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='';
+    card.style.transition='transform .5s cubic-bezier(.25,.46,.45,.94),background .3s,border-color .3s,box-shadow .4s';
+  });
+});
+
+/* ════ NAV SHRINK ════ */
+window.addEventListener('scroll',()=>{document.getElementById('nav').style.padding=window.scrollY>60?'13px 48px':'20px 48px';},{passive:true});
+
+/* ════ SKILLS CONSTELLATION ════ */
+const sc=document.getElementById('skillc'),sx=sc.getContext('2d');
+let sW,sH;
+function resizeSk(){sW=sc.width=sc.offsetWidth;sH=sc.height=520;}
+
+const nodes=[
+  {l:'Medical AI',       cat:'CV',       rx:.15,ry:.28,sz:21,cx:[1,2,4,8]},
+  {l:'Deep Learning',    cat:'AI',       rx:.42,ry:.17,sz:24,cx:[0,2,4,9]},
+  {l:'Computer Vision',  cat:'CV',       rx:.72,ry:.26,sz:18,cx:[1,3,4,10]},
+  {l:'LLM Systems',      cat:'Gen AI',   rx:.88,ry:.48,sz:20,cx:[2,4,6]},
+  {l:'RAG & Agents',     cat:'Gen AI',   rx:.5, ry:.5, sz:28,cx:[0,1,2,3,5,6,7,9]},
+  {l:'NLP / NER',        cat:'AI',       rx:.22,ry:.7, sz:18,cx:[1,4,6,9]},
+  {l:'PyTorch',          cat:'Tools',    rx:.65,ry:.76,sz:16,cx:[4,5,7]},
+  {l:'Edge AI',          cat:'Systems',  rx:.83,ry:.7, sz:17,cx:[4,6]},
+  {l:'MLOps',            cat:'Systems',  rx:.08,ry:.56,sz:15,cx:[0,5,9]},
+  {l:'Generative AI',    cat:'Gen AI',   rx:.38,ry:.85,sz:19,cx:[5,4,8,1]},
+  {l:'Biometrics',       cat:'CV',       rx:.7, ry:.53,sz:15,cx:[2,4,7]},
+];
+
+const catC={'AI':'#10b981','CV':'#3b82f6','Tools':'#a855f7','Systems':'#f59e0b','Research':'#ef4444','Gen AI':'#06b6d4'};
+let hovN=null,skMx=-1,skMy=-1,skT=0;
+
+sc.addEventListener('mousemove',e=>{const r=sc.getBoundingClientRect();skMx=e.clientX-r.left;skMy=e.clientY-r.top;});
+sc.addEventListener('mouseleave',()=>{skMx=-1;skMy=-1;hovN=null;});
+
+function drawSkills(){
+  if(!sW)resizeSk();
+  sx.clearRect(0,0,sW,sH);skT+=.008;
+  const pos=nodes.map((n,i)=>({x:n.rx*sW+Math.sin(skT+i*.8)*5,y:n.ry*sH+Math.cos(skT+i*.6)*5}));
+  hovN=null;
+  if(skMx>=0){nodes.forEach((n,i)=>{const dx=skMx-pos[i].x,dy=skMy-pos[i].y;if(Math.sqrt(dx*dx+dy*dy)<n.sz+10)hovN=i;});}
+  nodes.forEach((n,i)=>{n.cx.forEach(j=>{if(j>i){const isHi=hovN===i||hovN===j;sx.beginPath();sx.moveTo(pos[i].x,pos[i].y);sx.lineTo(pos[j].x,pos[j].y);sx.strokeStyle=isHi?'rgba(255,255,255,.18)':'rgba(255,255,255,.035)';sx.lineWidth=isHi?1.5:.8;sx.stroke();}});});
+  nodes.forEach((n,i)=>{
+    const {x,y}=pos[i],col=catC[n.cat];
+    const isHov=hovN===i,isCon=hovN!==null&&nodes[hovN]?.cx.includes(i);
+    const r=n.sz*(isHov?1.35:1);
+    if(isHov||isCon){const gl=sx.createRadialGradient(x,y,0,x,y,r*3.5);gl.addColorStop(0,col+'44');gl.addColorStop(1,'transparent');sx.beginPath();sx.arc(x,y,r*3.5,0,Math.PI*2);sx.fillStyle=gl;sx.fill();}
+    sx.beginPath();sx.arc(x,y,r+5,0,Math.PI*2);sx.strokeStyle=isHov?col:col+'28';sx.lineWidth=isHov?1.5:.8;sx.stroke();
+    sx.beginPath();sx.arc(x,y,r,0,Math.PI*2);sx.fillStyle=isHov?col+'30':col+'12';sx.fill();sx.strokeStyle=isHov?col:col+'55';sx.lineWidth=1.5;sx.stroke();
+    sx.beginPath();sx.arc(x,y,3.5,0,Math.PI*2);sx.fillStyle=isHov?'#fff':col;sx.fill();
+    const la=isHov?1:isCon?.65:hovN===null?.45:.12;
+    sx.font=`${isHov?'700':'500'} ${isHov?13:12}px 'Satoshi',sans-serif`;sx.fillStyle=`rgba(230,230,230,${la})`;sx.textAlign='center';sx.fillText(n.l,x,y+r+17);
+    if(isHov){sx.font='600 10px Satoshi,sans-serif';sx.fillStyle=col;sx.fillText(n.cat,x,y+r+31);}
+  });
+  requestAnimationFrame(drawSkills);
+}
+window.addEventListener('load',()=>{resizeSk();drawSkills();});
+window.addEventListener('resize',resizeSk);
+</script>
+
+<script>
+/* ══════════════════════════════════════════════
+   HERO NAME — per-letter emerald cascade (RESTORED)
+══════════════════════════════════════════════ */
+document.querySelectorAll('.hero-name .name-word').forEach(word => {
+  const txt = word.textContent.trim();
+  word.innerHTML = txt.split('').map((c, i) =>
+    `<span class="nl" style="display:inline-block;transition:color .22s ${(i*.045).toFixed(3)}s,text-shadow .22s ${(i*.045).toFixed(3)}s">${c}</span>`
+  ).join('');
+  word.addEventListener('mouseenter', () => {
+    word.querySelectorAll('.nl').forEach((s, i) => {
+      setTimeout(() => {
+        s.style.color = 'var(--emerald)';
+        s.style.textShadow = '0 0 36px rgba(16,185,129,0.65)';
+      }, i * 42);
+      setTimeout(() => {
+        s.style.color = '';
+        s.style.textShadow = '';
+      }, i * 42 + 580);
+    });
+  });
+});
+
+/* ══════════════════════════════════════════════
+   TYPEWRITER — hero subtitle
+══════════════════════════════════════════════ */
+(() => {
+  const el = document.querySelector('.hero-sub');
+  if (!el) return;
+  const full = el.textContent.trim();
+  el.style.cssText += ';opacity:1!important;animation:none!important;';
+  el.textContent = '';
+  let i = 0;
+  const type = () => {
+    if (i < full.length) {
+      el.textContent += full[i++];
+      setTimeout(type, i < 12 ? 72 : 20 + Math.random() * 22);
+    }
+  };
+  setTimeout(type, 1400);
+})();
+
+/* ══════════════════════════════════════════════
+   COUNTER ANIMATION — stat numbers
+══════════════════════════════════════════════ */
+function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+function runCounter(el, target, suffix, dur) {
+  const start = performance.now();
+  (function step(ts) {
+    const p = Math.min((ts - start) / dur, 1);
+    el.textContent = Math.floor(easeOutCubic(p) * target) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  })(performance.now());
+}
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const raw = el.dataset.count;
+    if (!raw) return;
+    const m = raw.match(/^([\d.]+)(.*)$/);
+    if (m) runCounter(el, parseFloat(m[1]), m[2], 1500);
+    cntObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.hb-num').forEach(el => {
+  const t = el.textContent.trim();
+  const m = t.match(/^([\d.]+)(.*)$/);
+  if (m) { el.dataset.count = t; el.textContent = '0' + m[2]; cntObs.observe(el); }
+});
+// Large recognition numbers
+document.querySelectorAll('.rb-inner div').forEach(el => {
+  const style = el.getAttribute('style') || '';
+  if (style.includes('54px') || style.includes('48px') || style.includes('26px')) {
+    const t = el.textContent.trim();
+    const m = t.match(/^([\d.]+)(.*)$/);
+    if (m && parseFloat(m[1]) > 0) {
+      el.dataset.count = t; el.textContent = '0' + m[2]; cntObs.observe(el);
+    }
+  }
+});
+
+/* ══════════════════════════════════════════════
+   MAGNETIC BUTTONS — cursor attraction
+══════════════════════════════════════════════ */
+document.querySelectorAll('.btn-p, .btn-g, .nav-cta').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width / 2) * 0.28;
+    const dy = (e.clientY - r.top - r.height / 2) * 0.28;
+    btn.style.transform = `translate(${dx}px,${dy}px) scale(1.05)`;
+    btn.style.transition = 'transform .08s linear';
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+    btn.style.transition = 'transform .5s cubic-bezier(.25,.46,.45,.94)';
+  });
+});
+
+/* ══════════════════════════════════════════════
+   CURSOR PARTICLE TRAIL
+══════════════════════════════════════════════ */
+const trailCanvas = document.createElement('canvas');
+trailCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9997;';
+document.body.appendChild(trailCanvas);
+const tc = trailCanvas.getContext('2d');
+let tW = 0, tH = 0;
+const resizeTC = () => { tW = trailCanvas.width = window.innerWidth; tH = trailCanvas.height = window.innerHeight; };
+resizeTC(); window.addEventListener('resize', resizeTC);
+const trail = [];
+let tMx = 0, tMy = 0;
+document.addEventListener('mousemove', e => { tMx = e.clientX; tMy = e.clientY; });
+(function drawTrail() {
+  tc.clearRect(0, 0, tW, tH);
+  if (Math.random() < 0.6) {
+    trail.push({
+      x: tMx + (Math.random() - .5) * 4,
+      y: tMy + (Math.random() - .5) * 4,
+      r: Math.random() * 1.8 + .4,
+      a: 0.55,
+      vx: (Math.random() - .5) * .7,
+      vy: (Math.random() - .5) * .7 - .25
+    });
+  }
+  for (let i = trail.length - 1; i >= 0; i--) {
+    const p = trail[i];
+    p.x += p.vx; p.y += p.vy; p.a -= 0.024; p.r *= 0.974;
+    if (p.a <= 0 || p.r < 0.1) { trail.splice(i, 1); continue; }
+    tc.beginPath();
+    tc.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    tc.fillStyle = `rgba(16,185,129,${p.a.toFixed(3)})`;
+    tc.fill();
+  }
+  requestAnimationFrame(drawTrail);
+})();
+
+
+
+/* ══════════════════════════════════════════════
+   STAGGERED GRID ENTRY ANIMATIONS
+══════════════════════════════════════════════ */
+const gridObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const kids = [...e.target.querySelectorAll(':scope > *')];
+    kids.forEach((kid, i) => {
+      setTimeout(() => {
+        kid.style.transition = `opacity .6s cubic-bezier(.25,.46,.45,.94) ${i*75}ms, transform .6s cubic-bezier(.25,.46,.45,.94) ${i*75}ms`;
+        kid.style.opacity = '1';
+        kid.style.transform = '';
+      }, 60);
+    });
+    gridObs.unobserve(e.target);
+  });
+}, { threshold: 0.04 });
+
+document.querySelectorAll('.research-grid,.conf-grid,.exp-bento,.pb,.rec-bento').forEach(g => {
+  [...g.querySelectorAll(':scope > *')].forEach(c => {
+    c.style.opacity = '0';
+    c.style.transform = 'translateY(30px) scale(0.97)';
+    c.style.transition = 'none';
+  });
+  gridObs.observe(g);
+});
+
+/* ══════════════════════════════════════════════
+   S-LABEL — slide in from left
+══════════════════════════════════════════════ */
+const lblObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.style.transition = 'opacity .55s ease, transform .55s cubic-bezier(.25,.46,.45,.94)';
+    e.target.style.opacity = '1';
+    e.target.style.transform = 'translateX(0)';
+    lblObs.unobserve(e.target);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.s-label').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateX(-22px)'; el.style.transition = 'none';
+  lblObs.observe(el);
+});
+
+/* ══════════════════════════════════════════════
+   TAGS — wave entrance on scroll
+══════════════════════════════════════════════ */
+const tagObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.tag').forEach((tag, i) => {
+      tag.style.opacity = '0'; tag.style.transform = 'translateY(14px)';
+      setTimeout(() => {
+        tag.style.transition = 'opacity .4s ease, transform .4s cubic-bezier(.25,.46,.45,.94), border-color .2s, color .2s, background .2s';
+        tag.style.opacity = '1'; tag.style.transform = '';
+      }, i * 52 + 180);
+    });
+    tagObs.unobserve(e.target);
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.about-tags, .ec-tags').forEach(el => tagObs.observe(el));
+
+/* ══════════════════════════════════════════════
+   TIMELINE — items stagger from left
+══════════════════════════════════════════════ */
+const tlObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.tl-item').forEach((item, i) => {
+      item.style.opacity = '0'; item.style.transform = 'translateX(-18px)';
+      setTimeout(() => {
+        item.style.transition = 'opacity .5s ease, transform .5s cubic-bezier(.25,.46,.45,.94)';
+        item.style.opacity = '1'; item.style.transform = '';
+      }, i * 115 + 100);
+    });
+    tlObs.unobserve(e.target);
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.tl').forEach(el => tlObs.observe(el));
+
+/* ══════════════════════════════════════════════
+   HERO SCROLL PARALLAX — name drifts up
+══════════════════════════════════════════════ */
+const heroName = document.querySelector('.hero-name');
+const heroSub  = document.querySelector('.hero-sub');
+const heroEye  = document.querySelector('.hero-eyebrow');
+window.addEventListener('scroll', () => {
+  const sy = window.scrollY;
+  const vh = window.innerHeight;
+  if (sy > vh) return;
+  const p = sy / vh;
+  if (heroEye)  heroEye.style.transform  = `translateY(${sy * .10}px)`;
+  if (heroName) { heroName.style.transform = `translateY(${sy * .18}px)`; heroName.style.opacity = `${1 - p * 1.6}`; }
+  if (heroSub)  { heroSub.style.transform  = `translateY(${sy * .12}px)`; heroSub.style.opacity  = `${1 - p * 1.8}`; }
+}, { passive: true });
+
+/* ══════════════════════════════════════════════
+   RESEARCH CARDS — citation highlight on hover
+══════════════════════════════════════════════ */
+document.querySelectorAll('.rc').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    const cite = card.querySelector('.rc-cite');
+    if (cite) { cite.style.transition='color .3s,font-weight .3s'; cite.style.color='var(--emerald)'; cite.style.fontWeight='700'; }
+    const award = card.querySelector('.rc-award');
+    if (award) { award.style.transition='letter-spacing .3s'; award.style.letterSpacing='.06em'; }
+  });
+  card.addEventListener('mouseleave', () => {
+    const cite = card.querySelector('.rc-cite'); if (cite) { cite.style.color=''; cite.style.fontWeight=''; }
+    const award = card.querySelector('.rc-award'); if (award) { award.style.letterSpacing=''; }
+  });
+});
+
+/* ══════════════════════════════════════════════
+   CONTACT EMAIL — letter wave glow
+══════════════════════════════════════════════ */
+const emailEl = document.querySelector('.contact-email');
+if (emailEl) {
+  const raw = emailEl.textContent.trim();
+  emailEl.innerHTML = raw.split('').map((c, i) =>
+    `<span style="display:inline-block;transition:color .18s ${(i*.018).toFixed(3)}s,transform .18s ${(i*.018).toFixed(3)}s">${c === '@' ? `<em style="font-style:normal;color:var(--emerald)">@</em>` : c}</span>`
+  ).join('');
+  emailEl.addEventListener('mouseenter', () => {
+    [...emailEl.querySelectorAll('span')].forEach((s, i) => {
+      setTimeout(() => { s.style.color='var(--emerald)'; s.style.transform='translateY(-4px)'; }, i * 20);
+      setTimeout(() => { s.style.color=''; s.style.transform=''; }, i * 20 + 380);
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════
+   HERO BENTO — floating micro-animation on load
+══════════════════════════════════════════════ */
+document.querySelectorAll('.hero-bento .gc').forEach((card, i) => {
+  const delay = i * 0.18;
+  const amp = 4 + i * 1.5;
+  let t = delay;
+  const float = () => {
+    if (card._tiltActive) { requestAnimationFrame(float); return; }
+    t += 0.008;
+    const y = Math.sin(t) * amp * 0.4;
+    card.style.transform = `translateY(${y}px)`;
+    requestAnimationFrame(float);
+  };
+  card.addEventListener('mouseenter', () => { card._tiltActive = true; });
+  card.addEventListener('mouseleave', () => { card._tiltActive = false; });
+  setTimeout(() => requestAnimationFrame(float), 1600 + i * 120);
+});
+
+/* ══════════════════════════════════════════════
+   NAV — active section highlight
+══════════════════════════════════════════════ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.style.color = '';
+        if (a.getAttribute('href') === '#' + e.target.id) {
+          a.style.color = 'var(--emerald)';
+          a.style.transition = 'color .3s';
+        }
+      });
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => sectionObs.observe(s));
+
+/* ══════════════════════════════════════════════
+   PROJECT CARDS — number glow on hover
+══════════════════════════════════════════════ */
+document.querySelectorAll('.pc').forEach(card => {
+  const num = card.querySelector('.pc-num');
+  card.addEventListener('mouseenter', () => {
+    if (num) { num.style.transition='color .3s,letter-spacing .3s'; num.style.color='var(--emerald)'; num.style.letterSpacing='.16em'; }
+  });
+  card.addEventListener('mouseleave', () => {
+    if (num) { num.style.color=''; num.style.letterSpacing=''; }
+  });
+});
+
+/* ══════════════════════════════════════════════
+   AMBIENT ORB — reacts to mouse position
+══════════════════════════════════════════════ */
+let orbMx = 0.5, orbMy = 0.5;
+document.addEventListener('mousemove', e => {
+  orbMx += (e.clientX / window.innerWidth - orbMx) * 0.04;
+  orbMy += (e.clientY / window.innerHeight - orbMy) * 0.04;
+});
+</script>
+</body>
+</html>
