@@ -623,66 +623,95 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
     <p style="font-size:14px;color:var(--text-dimmer);margin-top:8px">Personal collection — travels & moments</p>
   </div>
 
-  <div class="reveal" style="transition-delay:.1s;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:200px;gap:12px;margin-top:48px;">
+  <div class="reveal" style="transition-delay:.1s;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:220px;gap:10px;margin-top:48px;">
 
-    <!-- Slot 1 — large, replace bg color / src with your photo -->
-    <div style="grid-column:span 5;grid-row:span 2;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1f14,#091510,#05100a);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
-        <!-- Replace the div above with: <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);"> -->
-        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
-      </div>
-      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:20px;">
-        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+    <!-- Hero: cols 1-5, rows 1-2 -->
+    <div style="grid-column:1/6;grid-row:1/3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_7323.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:24px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
 
-    <!-- Slot 2 -->
-    <div style="grid-column:span 4;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d0f1f,#080a18,#050610);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
-        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+    <!-- R1: stacked right -->
+    <div style="grid-column:6/10;grid-row:1;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_5613.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
-      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
-        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+    </div>
+    <div style="grid-column:10/13;grid-row:1;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_2774.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
 
-    <!-- Slot 3 -->
-    <div style="grid-column:span 3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0f0a,#120a06,#0a0604);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
-        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
-      </div>
-      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
-        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+    <!-- R2: wide strip right -->
+    <div style="grid-column:6/13;grid-row:2;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_4295.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
 
-    <!-- Slot 4 — tall -->
-    <div style="grid-column:span 3;grid-row:span 2;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a1a1a,#061212,#030a0a);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
-        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+    <!-- R3: equal thirds -->
+    <div style="grid-column:1/5;grid-row:3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_6468.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
-      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
-        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+    </div>
+    <div style="grid-column:5/9;grid-row:3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_7126.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
+      </div>
+    </div>
+    <div style="grid-column:9/13;grid-row:3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_4486.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
 
-    <!-- Slot 5 -->
-    <div style="grid-column:span 4;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1508,#120f05,#0a0a04);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
-        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+    <!-- R4-5: wide left hero + right column -->
+    <div style="grid-column:1/8;grid-row:4/6;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_5041.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:24px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
-      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
-        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+    </div>
+    <div style="grid-column:8/13;grid-row:4;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_7413.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
+      </div>
+    </div>
+    <div style="grid-column:8/13;grid-row:5;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_2947.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
 
-    <!-- Slot 6 -->
-    <div style="grid-column:span 5;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <div style="width:100%;height:100%;background:linear-gradient(135deg,#141418,#0e0e12,#08080c);display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);" class="ph-bg">
-        <span style="font-size:12px;color:rgba(255,255,255,0.12);font-weight:600;letter-spacing:.08em">YOUR PHOTO</span>
+    <!-- R6: asymmetric closer -->
+    <div style="grid-column:1/5;grid-row:6;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_6917.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:20px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
-      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),transparent);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
-        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.85)">Add your caption here</span>
+    </div>
+    <div style="grid-column:5/9;grid-row:6;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_7654.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:20px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
+      </div>
+    </div>
+    <div style="grid-column:9/13;grid-row:6;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
+      <img src="assets/images2/IMG_8158.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:20px;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
 
