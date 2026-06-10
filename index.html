@@ -199,11 +199,64 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
   .hero-bento{grid-template-columns:1fr 1fr;}
   footer{padding:20px;flex-direction:column;gap:8px;text-align:center;}
 }
+
+/* ════════ NEURAL THREAD — global scroll-driven research knowledge graph ════════ */
+/* One SVG spine spans the full scroll height behind all content (z-index 0).      */
+/* Pointer-events disabled — node "hover" is driven by cursor-proximity in JS so   */
+/* it never intercepts clicks or hurts text readability.                           */
+#neural{position:absolute;top:0;left:0;z-index:0;pointer-events:none;overflow:visible;}
+#neural .spine{fill:none;stroke:url(#spineGrad);stroke-width:1.5;stroke-opacity:.5;stroke-linecap:round;stroke-linejoin:round;}
+#neural .branch{fill:none;stroke:rgba(255,255,255,.07);stroke-width:1;stroke-opacity:0;transition:stroke .35s ease,stroke-width .35s ease,stroke-opacity .9s ease;}
+#neural .bgrp.in .branch{stroke-opacity:1;}
+#neural .bgrp.lit .branch{stroke:rgba(16,185,129,.6);stroke-width:1.4;}
+/* node = halo (pulse) + ring + core; scales in on reveal */
+#neural .ndi{transform-box:fill-box;transform-origin:center;transform:scale(.35);opacity:0;transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .7s ease;}
+#neural .nd.in .ndi,#neural .bgrp.in .ndi,#neural .nd.on .ndi{transform:scale(1);opacity:1;}
+#neural .nd .ring{fill:none;stroke:var(--emerald);stroke-opacity:.3;stroke-width:1;transition:stroke-opacity .3s,stroke-width .3s;}
+#neural .nd .core{fill:var(--emerald);fill-opacity:.45;transition:fill-opacity .3s,fill .3s;}
+#neural .nd .halo{fill:var(--emerald);fill-opacity:0;transform-box:fill-box;transform-origin:center;}
+#neural .nlabel{fill:var(--text-dim);font:600 9px 'Satoshi',sans-serif;letter-spacing:.08em;text-transform:uppercase;opacity:0;transition:opacity .6s ease,fill .3s;}
+#neural .bgrp.in .nlabel{opacity:.26;}
+/* signal has reached this checkpoint */
+#neural .nd.on .ring{stroke-opacity:.65;}
+#neural .nd.on .core{fill-opacity:.95;}
+#neural .nd.on .halo{animation:ntPulse 2.8s ease-out infinite;}
+/* cursor proximity emphasis */
+#neural .nd.near .ring{stroke-opacity:.95;stroke-width:1.5;}
+#neural .nd.near .core{fill-opacity:1;}
+#neural .nd.near .halo{fill-opacity:.13;}
+#neural .nd.near .nlabel{opacity:.85;fill:var(--emerald);}
+/* card branch lit on card hover */
+#neural .bgrp.lit .ring{stroke-opacity:1;stroke-width:1.5;}
+#neural .bgrp.lit .core{fill-opacity:1;}
+#neural .bgrp.lit .halo{fill-opacity:.14;}
+/* final completion node — brighter "journey complete" pulse */
+#neural .nd.final.on .core{fill:#5eead4;fill-opacity:1;}
+#neural .nd.final.on .ring{stroke-opacity:.9;stroke-width:1.5;}
+#neural .nd.final.on .halo{animation:ntDone 2.4s ease-out infinite;}
+/* travelling signal particle */
+#neural .sig{opacity:0;transition:opacity .6s ease;}
+#neural .sig.live{opacity:1;}
+#neural .sig-core{fill:#eafff7;}
+@keyframes ntPulse{0%{transform:scale(1);fill-opacity:.28;}70%,100%{transform:scale(3.4);fill-opacity:0;}}
+@keyframes ntDone{0%{transform:scale(1);fill-opacity:.34;}70%,100%{transform:scale(5);fill-opacity:0;}}
+/* card lifts when its knowledge-graph branch lights up */
+.pc.nt-lit,.rc.nt-lit,.ec.nt-lit{border-color:rgba(16,185,129,.3)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 30px 60px rgba(0,0,0,.6),0 0 60px rgba(16,185,129,.12)!important;}
+@media(max-width:960px){
+  #neural .spine{stroke-width:1.2;stroke-opacity:.36;}
+  #neural .nlabel{display:none;}
+}
+@media(prefers-reduced-motion:reduce){
+  #neural .nd.on .halo,#neural .nd.final.on .halo{animation:none;}
+  #neural .sig{display:none!important;}
+  #neural .ndi{transition:none;}
+}
 </style>
 </head>
 <body>
 
 <canvas id="bgc"></canvas>
+<svg id="neural" aria-hidden="true"></svg>
 <div id="cd"></div>
 <div id="cr"></div>
 
@@ -1353,6 +1406,245 @@ document.addEventListener('mousemove', e => {
   orbMx += (e.clientX / window.innerWidth - orbMx) * 0.04;
   orbMy += (e.clientY / window.innerHeight - orbMy) * 0.04;
 });
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   NEURAL THREAD — a researcher's thought process, made visible.
+
+   A single SVG "spine" is generated from the live DOM layout: it threads
+   down the page through one checkpoint per section, weaving left↔right.
+   As you scroll, the spine draws itself (stroke-dashoffset) and a glowing
+   "research signal" travels along it. Each checkpoint, concept node, and
+   card-branch node fires a subtle pulse the moment the signal reaches it.
+
+   Everything is measured from real element positions, so it stays
+   responsive — on resize / image-load we simply rebuild. The layer sits
+   behind content (z-index 0) with pointer-events disabled; node hover is
+   simulated via cursor proximity so it never blocks text or clicks.
+   Honors prefers-reduced-motion (draws statically, no signal, no pulse).
+══════════════════════════════════════════════════════════════════════ */
+(function(){
+  const svg = document.getElementById('neural');
+  if(!svg) return;
+  const NS  = 'http://www.w3.org/2000/svg';
+  const RM  = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const el = (n,a)=>{const e=document.createElementNS(NS,n);if(a)for(const k in a)e.setAttribute(k,a[k]);return e;};
+  // element bounds in document (page) space
+  const drect = n=>{const r=n.getBoundingClientRect();return{x:r.left+scrollX,y:r.top+scrollY,w:r.width,h:r.height,cx:r.left+scrollX+r.width/2,cy:r.top+scrollY+r.height/2};};
+
+  /* Checkpoints the spine threads through, top → bottom.
+     xf = horizontal anchor as a fraction of content width (drives the weave). */
+  const STATIONS = [
+    {key:'hero',    sel:'.hero-name',          xf:0.28, kind:'origin'},
+    {key:'about',   sel:'#about .s-title',     xf:0.16, kind:'hub',
+       concepts:[
+         {l:'Machine Learning', dxf:-0.10, dy:48},
+         {l:'Research',         dxf:-0.02, dy:122},
+         {l:'Engineering',      dxf:-0.13, dy:130},
+         {l:'Problem Solving',  dxf:-0.06, dy:198},
+       ]},
+    {key:'exp',     sel:'#experience .s-title', xf:0.82, kind:'hub', cards:'#experience .ec'},
+    {key:'res',     sel:'#research .s-title',   xf:0.17, kind:'hub', cards:'#research .rc'},
+    {key:'proj',    sel:'#projects .s-title',   xf:0.80, kind:'hub', cards:'#projects .pc'},
+    {key:'skills',  sel:'#skills .s-title',     xf:0.20, kind:'dot'},
+    {key:'recog',   sel:'#recognition .s-title',xf:0.80, kind:'dot'},
+    {key:'contact', sel:'#contact .s-label',    xf:0.50, kind:'final'},
+  ];
+
+  let spine=null, spineLen=0, samples=[], nodes=[], cardLinks=[], contactNode=null;
+  let cur=0, sig=null, built=false, loopOn=false, io=null, mX=-1, mY=-1, rt=0;
+
+  function clearLinks(){
+    cardLinks.forEach(c=>{c.card.removeEventListener('mouseenter',c.on);c.card.removeEventListener('mouseleave',c.off);c.card.classList.remove('nt-lit');});
+    cardLinks=[];
+  }
+  // map a page-space y onto length along the (vertically monotonic) spine
+  function lenAtY(y){let bl=0,bd=1e9;for(let i=0;i<samples.length;i++){const d=Math.abs(samples[i].y-y);if(d<bd){bd=d;bl=samples[i].l;}}return bl;}
+
+  function makeNode(parent,x,y,r,opt){
+    opt=opt||{};
+    const g=el('g',{class:'nd'+(opt.cls?' '+opt.cls:''),transform:'translate('+x.toFixed(1)+','+y.toFixed(1)+')'});
+    const ndi=el('g',{class:'ndi'});
+    ndi.appendChild(el('circle',{class:'halo',r:r}));
+    ndi.appendChild(el('circle',{class:'ring',r:r}));
+    ndi.appendChild(el('circle',{class:'core',r:(r*0.42).toFixed(1)}));
+    g.appendChild(ndi);
+    if(opt.label){const t=el('text',{class:'nlabel',x:0,y:(r+14).toFixed(0),'text-anchor':'middle'});t.textContent=opt.label;g.appendChild(t);}
+    parent.appendChild(g);
+    const rec={el:g,x:x,y:y,len:0,on:false,interactive:!!opt.interactive,final:!!opt.final,near:false};
+    nodes.push(rec);
+    return rec;
+  }
+
+  function build(){
+    clearLinks();
+    nodes=[]; samples=[]; contactNode=null;
+    if(io){io.disconnect();io=null;}
+    svg.innerHTML='';
+
+    // measure full document height with the SVG collapsed so it can't inflate it
+    svg.style.height='0px';
+    const W=document.documentElement.clientWidth;
+    const H=document.documentElement.scrollHeight;
+    svg.setAttribute('width',W);
+    svg.setAttribute('height',H);
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    svg.style.width=W+'px'; svg.style.height=H+'px';
+
+    const defs=el('defs');
+    defs.innerHTML=
+      '<linearGradient id="spineGrad" x1="0" y1="0" x2="0" y2="1">'+
+        '<stop offset="0" stop-color="#10b981"/>'+
+        '<stop offset="0.5" stop-color="#3b82f6"/>'+
+        '<stop offset="1" stop-color="#6366f1"/>'+
+      '</linearGradient>'+
+      '<radialGradient id="sigGlow">'+
+        '<stop offset="0" stop-color="#10b981" stop-opacity="0.85"/>'+
+        '<stop offset="0.45" stop-color="#10b981" stop-opacity="0.28"/>'+
+        '<stop offset="1" stop-color="#10b981" stop-opacity="0"/>'+
+      '</radialGradient>';
+    svg.appendChild(defs);
+
+    // resolve each station's anchor point from the current layout
+    const pts=[];
+    STATIONS.forEach(s=>{
+      const n=document.querySelector(s.sel);
+      if(!n) return;
+      const r=drect(n);
+      pts.push({s:s, x:Math.max(28,Math.min(W-28, W*s.xf)), y:r.cy, sec:n.closest('section')});
+    });
+    if(pts.length<2) return;
+
+    // smooth serpentine: cubic per segment, both control handles at the
+    // vertical midpoint → gentle S-curves while always flowing downward
+    let d='M '+pts[0].x.toFixed(1)+' '+pts[0].y.toFixed(1);
+    for(let i=1;i<pts.length;i++){
+      const a=pts[i-1], b=pts[i], my=((a.y+b.y)/2).toFixed(1);
+      d+=' C '+a.x.toFixed(1)+' '+my+' '+b.x.toFixed(1)+' '+my+' '+b.x.toFixed(1)+' '+b.y.toFixed(1);
+    }
+    spine=el('path',{class:'spine',d:d});
+    svg.appendChild(spine);
+    spineLen=spine.getTotalLength();
+    spine.style.strokeDasharray=spineLen;
+    spine.style.strokeDashoffset=RM?0:spineLen;
+
+    // sample the spine so we can map any y → length-along-path
+    for(let l=0;l<=spineLen;l+=8){const p=spine.getPointAtLength(l);samples.push({l:l,x:p.x,y:p.y});}
+
+    const branchG=el('g'); svg.appendChild(branchG); // branch fans
+    const nodeG  =el('g'); svg.appendChild(nodeG);   // spine checkpoints
+
+    // collect what should fade/scale in when each section enters view
+    const revealMap=new Map();
+    const pushReveal=(sec,elem)=>{if(!sec)return;if(!revealMap.has(sec))revealMap.set(sec,[]);revealMap.get(sec).push(elem);};
+
+    // cubic branch from a hub point to a satellite point
+    const branchPath=(hx,hy,nx,ny)=>{const my=((hy+ny)/2).toFixed(1);return 'M '+hx.toFixed(1)+' '+hy.toFixed(1)+' C '+hx.toFixed(1)+' '+my+' '+nx.toFixed(1)+' '+my+' '+nx.toFixed(1)+' '+ny.toFixed(1);};
+
+    pts.forEach(p=>{
+      const s=p.s;
+      const r = s.kind==='origin'||s.kind==='final'?8 : s.kind==='hub'?7 : 5.5;
+      const cls = (s.kind==='final'?'final ':'')+(s.kind!=='dot'?'hub':'');
+      const cn=makeNode(nodeG,p.x,p.y,r,{cls:cls.trim(),interactive:true,final:s.kind==='final'});
+      pushReveal(p.sec,cn.el);
+      if(s.kind==='final') contactNode=cn;
+
+      // About → branch into named concept nodes
+      if(s.concepts){
+        s.concepts.forEach(c=>{
+          const cx=Math.max(24,Math.min(W-24, p.x+c.dxf*W)), cy=p.y+c.dy;
+          const grp=el('g',{class:'bgrp'});
+          grp.appendChild(el('path',{class:'branch',d:branchPath(p.x,p.y,cx,cy)}));
+          branchG.appendChild(grp);
+          makeNode(grp,cx,cy,4.5,{label:c.l,interactive:true});
+          pushReveal(p.sec,grp);
+        });
+      }
+
+      // Experience / Research / Projects → split toward each card
+      if(s.cards){
+        document.querySelectorAll(s.cards).forEach(card=>{
+          const cr=drect(card), onLeft=p.x<cr.cx;
+          const nx=onLeft?cr.x:cr.x+cr.w, ny=cr.y+Math.min(34,cr.h*0.5);
+          const grp=el('g',{class:'bgrp'});
+          grp.appendChild(el('path',{class:'branch',d:branchPath(p.x,p.y,nx,ny)}));
+          branchG.appendChild(grp);
+          makeNode(grp,nx,ny,4.5,{interactive:false});
+          const on =()=>{grp.classList.add('lit');card.classList.add('nt-lit');};
+          const off=()=>{grp.classList.remove('lit');card.classList.remove('nt-lit');};
+          card.addEventListener('mouseenter',on);
+          card.addEventListener('mouseleave',off);
+          cardLinks.push({card:card,on:on,off:off});
+          pushReveal(card.closest('section'),grp);
+        });
+      }
+    });
+
+    // travelling research signal
+    sig=el('g',{class:'sig'});
+    sig.appendChild(el('circle',{class:'sig-glow',r:16,fill:'url(#sigGlow)'}));
+    sig.appendChild(el('circle',{class:'sig-core',r:3}));
+    svg.appendChild(sig);
+
+    // resolve each node's activation length along the spine
+    nodes.forEach(n=>{n.len=lenAtY(n.y);});
+
+    built=true;
+
+    if(RM){ // static, fully-drawn map — no scroll animation
+      revealMap.forEach(list=>list.forEach(e=>e.classList.add('in')));
+      nodes.forEach(n=>{n.on=true;n.el.classList.add('on');});
+      return;
+    }
+
+    io=new IntersectionObserver(ents=>{ents.forEach(en=>{
+      if(!en.isIntersecting) return;
+      const list=revealMap.get(en.target);
+      if(list) list.forEach(e=>e.classList.add('in'));
+      io.unobserve(en.target);
+    });},{threshold:0.04,rootMargin:'0px 0px -8% 0px'});
+    revealMap.forEach((list,sec)=>io.observe(sec));
+
+    if(!loopOn){loopOn=true;requestAnimationFrame(frame);}
+  }
+
+  function frame(){
+    if(built && spine){
+      const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+      const target=Math.min(1,Math.max(0,scrollY/max))*spineLen;
+      cur+=(target-cur)*0.12;                       // eased follow → premium feel
+
+      spine.style.strokeDashoffset=(spineLen-cur);  // progressive draw
+      const p=spine.getPointAtLength(Math.min(cur,spineLen));
+      sig.setAttribute('transform','translate('+p.x.toFixed(1)+','+p.y.toFixed(1)+')');
+      if(cur>3 && !sig.classList.contains('live')) sig.classList.add('live');
+
+      // checkpoint activation as the signal passes
+      for(let i=0;i<nodes.length;i++){const n=nodes[i];if(!n.on && cur>=n.len-2){n.on=true;n.el.classList.add('on');}}
+
+      // cursor-proximity glow (simulated hover, no pointer-events needed)
+      if(mX>=0){
+        for(let i=0;i<nodes.length;i++){
+          const n=nodes[i];
+          if(!n.interactive) continue;
+          const sy=n.y-scrollY;
+          if(sy<-90||sy>innerHeight+90){if(n.near){n.near=false;n.el.classList.remove('near');}continue;}
+          const dx=mX-n.x, dy=mY-sy, near=(dx*dx+dy*dy)<2700; // ~52px radius
+          if(near!==n.near){n.near=near;n.el.classList.toggle('near',near);}
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  addEventListener('mousemove',e=>{mX=e.clientX;mY=e.clientY;},{passive:true});
+  addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(build,180);});
+  // build once layout is settled, then again after images load (heights shift)
+  if(document.readyState==='complete') build(); else addEventListener('load',build);
+  addEventListener('load',()=>setTimeout(build,500));
+})();
 </script>
 </body>
 </html>
