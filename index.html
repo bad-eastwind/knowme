@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Anwesh Kabiraj · AI Research Architect & Engineer</title>
+<meta name="description" content="Anwesh Kabiraj — AI Research Architect & Applied Researcher. Clinical imaging, physics-guided ML, and production LLM systems across GentracLabs and TCS Innovation Labs. 7 peer-reviewed publications, 2 patents pending.">
+<link rel="canonical" href="https://bad-eastwind.github.io/knowme/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Anwesh Kabiraj · AI Research Architect & Engineer">
+<meta property="og:description" content="Clinical imaging, physics-guided ML, and production LLM systems. 7 peer-reviewed publications, 2 patents pending.">
+<meta property="og:url" content="https://bad-eastwind.github.io/knowme/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Anwesh Kabiraj · AI Research Architect & Engineer">
+<meta name="twitter:description" content="Clinical imaging, physics-guided ML, and production LLM systems across GentracLabs and TCS Innovation Labs.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070709'/%3E%3Ctext x='32' y='43' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='26' fill='%2310b981' text-anchor='middle'%3EAK%3C/text%3E%3C/svg%3E">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=clash-display@600,700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -23,7 +33,13 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Satoshi',-apple-system,sans-serif;overflow-x:hidden;cursor:none;}
+body{background:var(--bg);color:var(--text);font-family:'Satoshi',-apple-system,sans-serif;overflow-x:hidden;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--emerald);outline-offset:3px;border-radius:4px;}
+#cd,#cr{display:none;}
+@media(hover:hover) and (pointer:fine){
+  body{cursor:none;}
+  #cd,#cr{display:block;}
+}
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;}
 
 /* CURSOR */
@@ -183,6 +199,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px);filter:blur(5px);}to{opacity:1;transform:translateY(0);filter:blur(0);}}
 @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(18px,-18px) scale(1.03);}66%{transform:translate(-12px,14px) scale(0.97);}}
+.orb-float{animation:orbFloat 7s ease-in-out infinite;}
 @keyframes pulse{0%,100%{box-shadow:0 0 8px var(--emerald);transform:scale(1);}50%{box-shadow:0 0 22px var(--emerald),0 0 44px rgba(16,185,129,0.28);transform:scale(1.3);}}
 @keyframes tlDotPulse{0%,100%{box-shadow:0 0 8px rgba(16,185,129,0.3);}50%{box-shadow:0 0 14px rgba(16,185,129,0.65),0 0 24px rgba(16,185,129,0.15);}}
 .reveal{opacity:0;transform:translateY(24px) scale(0.985);filter:blur(5px);transition:opacity .9s cubic-bezier(0.16,1,0.3,1),transform .9s cubic-bezier(0.16,1,0.3,1),filter .7s cubic-bezier(0.16,1,0.3,1);}
@@ -243,6 +260,13 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 #neural .sig{opacity:0;transition:opacity .6s ease;}
 #neural .sig.live{opacity:1;}
 #neural .sig-core{fill:#eafff7;}
+/* real click targets for the node graph live in #ntHits (an HTML overlay
+   above section content — the SVG itself is z-index:0 and can never win a
+   hit-test against a section, gutters included). These dots stay decorative;
+   hover/focus feedback arrives via .near, toggled from the paired button. */
+#ntHits{position:absolute;top:0;left:0;z-index:2;pointer-events:none;}
+#ntHits .nt-hit{position:absolute;background:transparent;border:0;padding:0;margin:0;border-radius:50%;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:rgba(16,185,129,.25);}
+#ntHits .nt-hit:focus-visible{outline:2px solid var(--emerald);outline-offset:2px;}
 @keyframes ntPulse{0%{transform:scale(1);fill-opacity:.28;}70%,100%{transform:scale(3.4);fill-opacity:0;}}
 @keyframes ntDone{0%{transform:scale(1);fill-opacity:.34;}70%,100%{transform:scale(5);fill-opacity:0;}}
 /* card lifts when its knowledge-graph branch lights up */
@@ -252,6 +276,8 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
   #neural .nlabel{display:none;}
 }
 @media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .sdot,.tl-item::before,.orb-float{animation:none;}
   #neural .nd.on .halo,#neural .nd.final.on .halo{animation:none;}
   #neural .sig{display:none!important;}
   #neural .ndi{transition:none;}
@@ -325,7 +351,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
       <div style="font-size:12.5px;color:var(--text-dim);margin-top:10px;line-height:1.55">Clinical Imaging · Colour Science · LLM Systems</div>
     </div>
     <div class="gc hb-years" style="position:relative;overflow:hidden;min-width:90px">
-      <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(16,185,129,0.18),rgba(59,130,246,0.08),transparent 70%);animation:orbFloat 7s ease-in-out infinite"></div>
+      <div class="orb-float" style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(16,185,129,0.18),rgba(59,130,246,0.08),transparent 70%)"></div>
       <div style="position:relative;text-align:center">
         <div style="font-family:'Clash Display',sans-serif;font-size:36px;font-weight:700;letter-spacing:-0.05em">4+</div>
         <div style="font-size:10px;color:var(--text-dim);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:2px">Years</div>
@@ -525,7 +551,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 <section id="research">
   <div class="reveal">
     <div class="s-label">Research</div>
-    <h2 class="s-title">7 Peer - Reviewed<br><span class="d">Publications</span></h2>
+    <h2 class="s-title">7 Peer-Reviewed<br><span class="d">Publications</span></h2>
     <p style="font-size:14px;color:var(--text-dimmer);margin-top:8px">IEEE · Springer · Elsevier</p>
   </div>
 
@@ -796,7 +822,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
     <!-- Hero: cols 1-5, rows 1-2 -->
     <div style="grid-column:1/6;grid-row:1/3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_7323.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_7323.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 01" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:24px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
@@ -804,13 +830,13 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
     <!-- R1: stacked right -->
     <div style="grid-column:6/10;grid-row:1;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_5613.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_5613.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 02" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
     <div style="grid-column:10/13;grid-row:1;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_2774.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_2774.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 03" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
@@ -818,7 +844,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
     <!-- R2: wide strip right -->
     <div style="grid-column:6/13;grid-row:2;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_4295.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_4295.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 04" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
@@ -826,19 +852,19 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
     <!-- R3: equal thirds -->
     <div style="grid-column:1/5;grid-row:3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_6468.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_6468.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 05" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
     <div style="grid-column:5/9;grid-row:3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_7126.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_7126.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 06" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
     <div style="grid-column:9/13;grid-row:3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_4486.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_4486.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 07" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
@@ -846,19 +872,19 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
     <!-- R4-5: wide left hero + right column -->
     <div style="grid-column:1/8;grid-row:4/6;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_5041.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_5041.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 08" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:24px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
     <div style="grid-column:8/13;grid-row:4;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_7413.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_7413.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 09" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
     <div style="grid-column:8/13;grid-row:5;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_2947.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_2947.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 10" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:18px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
@@ -866,19 +892,19 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
     <!-- R6: asymmetric closer -->
     <div style="grid-column:1/5;grid-row:6;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_6917.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_6917.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 11" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:20px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
     <div style="grid-column:5/9;grid-row:6;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_7654.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_7654.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 12" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:20px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
     </div>
     <div style="grid-column:9/13;grid-row:6;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;">
-      <img src="assets/images2/IMG_8158.jpg" class="ph-bg" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
+      <img src="assets/images2/IMG_8158.jpg" class="ph-bg" alt="Photography by Anwesh Kabiraj — frame 13" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);">
       <div class="ph-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:20px;">
         <span style="font-size:12px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,0.85)">SHOT</span>
       </div>
@@ -888,17 +914,20 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 </section>
 
 <script>
-// Photo hover parallax — runs once DOM is ready
-document.querySelectorAll('#photography .ph-bg').forEach(bg => {
-  const wrap = bg.parentElement;
-  wrap.addEventListener('mouseenter', () => { bg.style.transition = 'transform .42s cubic-bezier(0.25,0.46,0.45,0.94)'; bg.style.transform = 'scale(1.08)'; });
-  wrap.addEventListener('mouseleave', () => { bg.style.transition = 'transform .72s cubic-bezier(0.25,0.46,0.45,0.94)'; bg.style.transform = 'scale(1)'; });
-  const ov = wrap.querySelector('.ph-ov');
-  if (ov) {
-    wrap.addEventListener('mouseenter', () => ov.style.opacity = '1');
-    wrap.addEventListener('mouseleave', () => ov.style.opacity = '0');
-  }
-});
+// Photo hover parallax — runs once DOM is ready. Skipped on touch: mouseenter
+// without mouseleave on tap would leave cards permanently zoomed/overlaid.
+if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  document.querySelectorAll('#photography .ph-bg').forEach(bg => {
+    const wrap = bg.parentElement;
+    wrap.addEventListener('mouseenter', () => { bg.style.transition = 'transform .42s cubic-bezier(0.25,0.46,0.45,0.94)'; bg.style.transform = 'scale(1.08)'; });
+    wrap.addEventListener('mouseleave', () => { bg.style.transition = 'transform .72s cubic-bezier(0.25,0.46,0.45,0.94)'; bg.style.transform = 'scale(1)'; });
+    const ov = wrap.querySelector('.ph-ov');
+    if (ov) {
+      wrap.addEventListener('mouseenter', () => ov.style.opacity = '1');
+      wrap.addEventListener('mouseleave', () => ov.style.opacity = '0');
+    }
+  });
+}
 </script>
 
 <div class="div-line"><hr></div>
@@ -1023,21 +1052,31 @@ document.querySelectorAll('#photography .ph-bg').forEach(bg => {
 </section>
 
 <footer>
-  <div class="fc">© 2024 Anwesh Kabiraj · Kolkata, India</div>
-  <div class="fc">AI Engineer & Applied Researcher · TCS Innovation Labs</div>
+  <div class="fc">© 2026 Anwesh Kabiraj · Kolkata, India</div>
+  <div class="fc">AI Research Architect @ GentracLabs · AI Engineer / Researcher @ TCS Innovation Labs</div>
 </footer>
 
 <script>
+/* ════ GLOBAL MOTION FLAGS ════
+   canHover gates cursor-follow decoration off touch devices (skips dead
+   work + avoids stuck-hover after tap). RM gates continuous ambient motion
+   per prefers-reduced-motion. Both read once; a live-preference-change edge
+   case isn't worth the extra listeners here. */
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canHover = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
 /* ════ BACKGROUND ════ */
 const bgc=document.getElementById('bgc'),bx=bgc.getContext('2d');
 let bW,bH;
-function resizeBg(){bW=bgc.width=window.innerWidth;bH=bgc.height=window.innerHeight;}
+function resizeBg(){bW=bgc.width=window.innerWidth;bH=bgc.height=window.innerHeight;bgStaticDone=false;}
+let bgStaticDone=false;
 resizeBg();window.addEventListener('resize',resizeBg);
 const pts=Array.from({length:90},()=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,r:Math.random()*1.2+.3,a:Math.random()*.35+.05,life:Math.random()*400,max:Math.random()*350+200}));
 let gA=0,bgSY=0,bgLSY=0,bgVelS=0;
 window.addEventListener('scroll',()=>{bgSY=window.scrollY;},{passive:true});
 function drawBg(){
-  bx.clearRect(0,0,bW,bH);gA+=.0022;
+  if(RM){if(bgStaticDone)return;bgStaticDone=true;}
+  bx.clearRect(0,0,bW,bH);if(!RM)gA+=.0022;
   bgVelS+=(bgSY-bgLSY-bgVelS)*.15;bgLSY=bgSY;
   const docH=Math.max(1,document.body.scrollHeight-window.innerHeight);
   const sp=bgSY/docH;
@@ -1049,7 +1088,7 @@ function drawBg(){
     bx.fillStyle=g;bx.fillRect(0,0,bW,bH);
   });
   pts.forEach(p=>{
-    p.x+=p.vx/bW;p.y+=p.vy/bH+bgVelS*.000055;p.life++;
+    if(!RM){p.x+=p.vx/bW;p.y+=p.vy/bH+bgVelS*.000055;p.life++;}
     if(p.x<0||p.x>1)p.vx*=-1;if(p.y<0||p.y>1)p.vy*=-1;
     if(p.life>p.max){p.life=0;p.max=Math.random()*350+200;}
     const prog=p.life/p.max;const a=p.a*(prog<.1?prog*10:prog>.9?(1-prog)*10:1);
@@ -1058,38 +1097,43 @@ function drawBg(){
     else{bx.arc(p.x*bW,p.y*bH,p.r,0,Math.PI*2);}
     bx.fillStyle=`rgba(255,255,255,${a})`;bx.fill();
   });
-  requestAnimationFrame(drawBg);
 }
-drawBg();
 
-/* ════ CURSOR ════ */
-const dotEl=document.getElementById('cd'),ringEl=document.getElementById('cr');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dotEl.style.left=mx+'px';dotEl.style.top=my+'px';});
-(function lerpRing(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ringEl.style.left=rx+'px';ringEl.style.top=ry+'px';requestAnimationFrame(lerpRing);})();
-document.querySelectorAll('a,button,.gc,.pc,.rc,.ec,.rb').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
-});
+/* ════ CURSOR ════ (skipped on touch — native cursor already hidden only
+   when hover:hover+pointer:fine, see CSS) */
+let tickCursor=()=>{};
+if(canHover){
+  const dotEl=document.getElementById('cd'),ringEl=document.getElementById('cr');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dotEl.style.left=mx+'px';dotEl.style.top=my+'px';});
+  tickCursor=()=>{rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ringEl.style.left=rx+'px';ringEl.style.top=ry+'px';};
+  document.querySelectorAll('a,button,.gc,.pc,.rc,.ec,.rb').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+  });
+}
 
 /* ════ SCROLL REVEAL ════ */
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v');});},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* ════ 3D TILT ════ */
-document.querySelectorAll('.gc').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const dx=(e.clientX-r.left-r.width/2)/(r.width/2);
-    const dy=(e.clientY-r.top-r.height/2)/(r.height/2);
-    card.style.transform=`perspective(1200px) rotateX(${-dy*3.5}deg) rotateY(${dx*3.5}deg) translateY(-3px) scale(1.012)`;
-    card.style.transition='transform .08s ease';
+/* ════ 3D TILT ════ (touch: mousemove barely fires and a stray synthetic
+   tap-mouseenter would leave a card stuck mid-tilt with no mouseleave) */
+if(canHover){
+  document.querySelectorAll('.gc').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const dx=(e.clientX-r.left-r.width/2)/(r.width/2);
+      const dy=(e.clientY-r.top-r.height/2)/(r.height/2);
+      card.style.transform=`perspective(1200px) rotateX(${-dy*3.5}deg) rotateY(${dx*3.5}deg) translateY(-3px) scale(1.012)`;
+      card.style.transition='transform .08s ease';
+    });
+    card.addEventListener('mouseleave',()=>{
+      card.style.transform='';
+      card.style.transition='transform .5s cubic-bezier(.25,.46,.45,.94),background .3s,border-color .3s,box-shadow .4s';
+    });
   });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform='';
-    card.style.transition='transform .5s cubic-bezier(.25,.46,.45,.94),background .3s,border-color .3s,box-shadow .4s';
-  });
-});
+}
 
 /* ════ NAV SHRINK ════ */
 window.addEventListener('scroll',()=>{document.getElementById('nav').style.padding=window.scrollY>60?'13px 48px':'20px 48px';},{passive:true});
@@ -1158,7 +1202,7 @@ sc.addEventListener('mouseleave',()=>{skMx=-1;skMy=-1;hovN=null;});
 
 function drawSkills(){
   if(!sW)resizeSk();
-  sx.clearRect(0,0,sW,sH);skT+=.008;
+  sx.clearRect(0,0,sW,sH);if(!RM)skT+=.008;
   const pos=nodes.map((n,i)=>({x:n.rx*sW+Math.sin(skT+i*.8)*5,y:n.ry*sH+Math.cos(skT+i*.6)*5}));
   hovN=null;
   if(skMx>=0){nodes.forEach((n,i)=>{const dx=skMx-pos[i].x,dy=skMy-pos[i].y;if(Math.sqrt(dx*dx+dy*dy)<n.sz+10)hovN=i;});}
@@ -1175,9 +1219,7 @@ function drawSkills(){
     sx.font=`${isHov?'700':'500'} ${isHov?13:12}px 'Satoshi',sans-serif`;sx.fillStyle=`rgba(230,230,230,${la})`;sx.textAlign='center';sx.fillText(n.l,x,y+r+17);
     if(isHov){sx.font='600 10px Satoshi,sans-serif';sx.fillStyle=col;sx.fillText(n.cat,x,y+r+31);}
   });
-  requestAnimationFrame(drawSkills);
 }
-window.addEventListener('load',()=>{resizeSk();drawSkills();});
 window.addEventListener('resize',resizeSk);
 </script>
 
@@ -1265,58 +1307,65 @@ document.querySelectorAll('.rb-inner div').forEach(el => {
 });
 
 /* ══════════════════════════════════════════════
-   MAGNETIC BUTTONS — cursor attraction
+   MAGNETIC BUTTONS — cursor attraction (touch has no
+   cursor to attract toward, and stray taps would stick)
 ══════════════════════════════════════════════ */
-document.querySelectorAll('.btn-p, .btn-g, .nav-cta').forEach(btn => {
-  btn.addEventListener('mousemove', e => {
-    const r = btn.getBoundingClientRect();
-    const dx = (e.clientX - r.left - r.width / 2) * 0.28;
-    const dy = (e.clientY - r.top - r.height / 2) * 0.28;
-    btn.style.transform = `translate(${dx}px,${dy}px) scale(1.05)`;
-    btn.style.transition = 'transform .08s linear';
+if (canHover) {
+  document.querySelectorAll('.btn-p, .btn-g, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width / 2) * 0.28;
+      const dy = (e.clientY - r.top - r.height / 2) * 0.28;
+      btn.style.transform = `translate(${dx}px,${dy}px) scale(1.05)`;
+      btn.style.transition = 'transform .08s linear';
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+      btn.style.transition = 'transform .5s cubic-bezier(.25,.46,.45,.94)';
+    });
   });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-    btn.style.transition = 'transform .5s cubic-bezier(.25,.46,.45,.94)';
-  });
-});
+}
 
 /* ══════════════════════════════════════════════
-   CURSOR PARTICLE TRAIL
+   CURSOR PARTICLE TRAIL — pure decoration on top of the
+   custom cursor, so it shares that cursor's gating: off
+   on touch, and off under prefers-reduced-motion too
 ══════════════════════════════════════════════ */
-const trailCanvas = document.createElement('canvas');
-trailCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9997;';
-document.body.appendChild(trailCanvas);
-const tc = trailCanvas.getContext('2d');
-let tW = 0, tH = 0;
-const resizeTC = () => { tW = trailCanvas.width = window.innerWidth; tH = trailCanvas.height = window.innerHeight; };
-resizeTC(); window.addEventListener('resize', resizeTC);
-const trail = [];
-let tMx = 0, tMy = 0;
-document.addEventListener('mousemove', e => { tMx = e.clientX; tMy = e.clientY; });
-(function drawTrail() {
-  tc.clearRect(0, 0, tW, tH);
-  if (Math.random() < 0.6) {
-    trail.push({
-      x: tMx + (Math.random() - .5) * 4,
-      y: tMy + (Math.random() - .5) * 4,
-      r: Math.random() * 1.8 + .4,
-      a: 0.55,
-      vx: (Math.random() - .5) * .7,
-      vy: (Math.random() - .5) * .7 - .25
-    });
-  }
-  for (let i = trail.length - 1; i >= 0; i--) {
-    const p = trail[i];
-    p.x += p.vx; p.y += p.vy; p.a -= 0.024; p.r *= 0.974;
-    if (p.a <= 0 || p.r < 0.1) { trail.splice(i, 1); continue; }
-    tc.beginPath();
-    tc.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    tc.fillStyle = `rgba(16,185,129,${p.a.toFixed(3)})`;
-    tc.fill();
-  }
-  requestAnimationFrame(drawTrail);
-})();
+let tickTrail = () => {};
+if (canHover && !RM) {
+  const trailCanvas = document.createElement('canvas');
+  trailCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9997;';
+  document.body.appendChild(trailCanvas);
+  const tc = trailCanvas.getContext('2d');
+  let tW = 0, tH = 0;
+  const resizeTC = () => { tW = trailCanvas.width = window.innerWidth; tH = trailCanvas.height = window.innerHeight; };
+  resizeTC(); window.addEventListener('resize', resizeTC);
+  const trail = [];
+  let tMx = 0, tMy = 0;
+  document.addEventListener('mousemove', e => { tMx = e.clientX; tMy = e.clientY; });
+  tickTrail = () => {
+    tc.clearRect(0, 0, tW, tH);
+    if (Math.random() < 0.6) {
+      trail.push({
+        x: tMx + (Math.random() - .5) * 4,
+        y: tMy + (Math.random() - .5) * 4,
+        r: Math.random() * 1.8 + .4,
+        a: 0.55,
+        vx: (Math.random() - .5) * .7,
+        vy: (Math.random() - .5) * .7 - .25
+      });
+    }
+    for (let i = trail.length - 1; i >= 0; i--) {
+      const p = trail[i];
+      p.x += p.vx; p.y += p.vy; p.a -= 0.024; p.r *= 0.974;
+      if (p.a <= 0 || p.r < 0.1) { trail.splice(i, 1); continue; }
+      tc.beginPath();
+      tc.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      tc.fillStyle = `rgba(16,185,129,${p.a.toFixed(3)})`;
+      tc.fill();
+    }
+  };
+}
 
 
 
@@ -1452,23 +1501,27 @@ if (emailEl) {
 }
 
 /* ══════════════════════════════════════════════
-   HERO BENTO — floating micro-animation on load
+   HERO BENTO — floating micro-animation, driven by
+   the shared masterTick loop below instead of one
+   self-scheduling rAF chain per card
 ══════════════════════════════════════════════ */
-document.querySelectorAll('.hero-bento .gc').forEach((card, i) => {
-  const delay = i * 0.18;
-  const amp = 2.5 + i * 0.7;
-  let t = delay;
-  const float = () => {
-    if (card._tiltActive) { requestAnimationFrame(float); return; }
-    t += 0.008;
-    const y = Math.sin(t) * amp * 0.4;
-    card.style.transform = `translateY(${y}px)`;
-    requestAnimationFrame(float);
-  };
-  card.addEventListener('mouseenter', () => { card._tiltActive = true; });
-  card.addEventListener('mouseleave', () => { card._tiltActive = false; });
-  setTimeout(() => requestAnimationFrame(float), 1600 + i * 120);
-});
+const bentoFloats = [...document.querySelectorAll('.hero-bento .gc')].map((card, i) => ({
+  card, t: i * 0.18, amp: 2.5 + i * 0.7, start: performance.now() + 1600 + i * 120
+}));
+if (canHover) {
+  bentoFloats.forEach(f => {
+    f.card.addEventListener('mouseenter', () => { f.card._tiltActive = true; });
+    f.card.addEventListener('mouseleave', () => { f.card._tiltActive = false; });
+  });
+}
+function tickFloats(now) {
+  if (RM) return;
+  bentoFloats.forEach(f => {
+    if (now < f.start || f.card._tiltActive) return;
+    f.t += 0.008;
+    f.card.style.transform = `translateY(${(Math.sin(f.t) * f.amp * 0.4).toFixed(2)}px)`;
+  });
+}
 
 /* ══════════════════════════════════════════════
    NAV — active section highlight
@@ -1511,6 +1564,23 @@ document.addEventListener('mousemove', e => {
   orbMx += (e.clientX / window.innerWidth - orbMx) * 0.04;
   orbMy += (e.clientY / window.innerHeight - orbMy) * 0.04;
 });
+
+/* ══════════════════════════════════════════════
+   MASTER TICKER — one shared rAF loop drives the bg
+   canvas, cursor ring, cursor trail, skills constellation,
+   and hero-bento float, replacing five independent
+   self-scheduling rAF chains (each no-ops when its
+   feature is gated off by canHover/RM above)
+══════════════════════════════════════════════ */
+function masterTick(now) {
+  drawBg();
+  tickCursor();
+  tickTrail();
+  drawSkills();
+  tickFloats(now);
+  requestAnimationFrame(masterTick);
+}
+requestAnimationFrame(masterTick);
 </script>
 
 <script>
@@ -1539,27 +1609,55 @@ document.addEventListener('mousemove', e => {
   // element bounds in document (page) space
   const drect = n=>{const r=n.getBoundingClientRect();return{x:r.left+scrollX,y:r.top+scrollY,w:r.width,h:r.height,cx:r.left+scrollX+r.width/2,cy:r.top+scrollY+r.height/2};};
 
+  /* The SVG itself sits at z-index:0, behind every section (z-index:1) —
+     that's deliberate, it's a decorative backdrop. But that means a real
+     click can never reach an SVG circle wherever a section's content
+     overlaps it, gutters included (a section's box covers its full gap
+     area even where nothing is painted). So click targets for the node
+     graph live in this separate absolutely-positioned, higher-z overlay
+     instead — invisible real <button>s, positioned in the same page-space
+     coordinates as their paired SVG dot, which stays purely visual. */
+  const hitLayer = document.createElement('div');
+  hitLayer.id = 'ntHits';
+  document.body.appendChild(hitLayer);
+  function makeHit(x,y,r,cb,ariaLabel,pairEl){
+    const b=document.createElement('button');
+    b.type='button';
+    b.className='nt-hit';
+    b.style.left=(x-r).toFixed(1)+'px'; b.style.top=(y-r).toFixed(1)+'px';
+    b.style.width=(r*2).toFixed(1)+'px'; b.style.height=(r*2).toFixed(1)+'px';
+    b.setAttribute('aria-label','Jump to '+ariaLabel);
+    b.addEventListener('click',cb);
+    if(pairEl){
+      const glow=()=>pairEl.classList.add('near'), unglow=()=>pairEl.classList.remove('near');
+      b.addEventListener('mouseenter',glow); b.addEventListener('mouseleave',unglow);
+      b.addEventListener('focus',glow); b.addEventListener('blur',unglow);
+    }
+    hitLayer.appendChild(b);
+    return b;
+  }
+
   /* Checkpoints the spine threads through, top → bottom.
      xf = horizontal anchor as a fraction of content width (drives the weave). */
   const STATIONS = [
-    {key:'hero',    sel:'.hero-name',          xf:0.28, kind:'origin'},
-    {key:'about',   sel:'#about .s-title',     xf:0.16, kind:'hub',
+    {key:'hero',    sel:'.hero-name',          xf:0.28, kind:'origin', nav:'top'},
+    {key:'about',   sel:'#about .s-title',     xf:0.16, kind:'hub',    nav:'About',
        concepts:[
          {l:'Machine Learning', dxf:-0.10, dy:48},
          {l:'Research',         dxf:-0.02, dy:122},
          {l:'Engineering',      dxf:-0.13, dy:130},
          {l:'Problem Solving',  dxf:-0.06, dy:198},
        ]},
-    {key:'exp',     sel:'#experience .s-title', xf:0.82, kind:'hub', cards:'#experience .ec'},
-    {key:'res',     sel:'#research .s-title',   xf:0.17, kind:'hub', cards:'#research .rc'},
-    {key:'proj',    sel:'#projects .s-title',   xf:0.80, kind:'hub', cards:'#projects .pc'},
-    {key:'skills',  sel:'#skills .s-title',     xf:0.20, kind:'dot'},
-    {key:'recog',   sel:'#recognition .s-title',xf:0.80, kind:'dot'},
-    {key:'contact', sel:'#contact .s-label',    xf:0.50, kind:'final'},
+    {key:'exp',     sel:'#experience .s-title', xf:0.82, kind:'hub', nav:'Experience',  cards:'#experience .ec'},
+    {key:'res',     sel:'#research .s-title',   xf:0.17, kind:'hub', nav:'Research',    cards:'#research .rc'},
+    {key:'proj',    sel:'#projects .s-title',   xf:0.80, kind:'hub', nav:'Projects',    cards:'#projects .pc'},
+    {key:'skills',  sel:'#skills .s-title',     xf:0.20, kind:'dot', nav:'Skills'},
+    {key:'recog',   sel:'#recognition .s-title',xf:0.80, kind:'dot', nav:'Recognition'},
+    {key:'contact', sel:'#contact .s-label',    xf:0.50, kind:'final', nav:'Contact'},
   ];
 
   let spine=null, spineLen=0, samples=[], nodes=[], cardLinks=[], contactNode=null;
-  let cur=0, sig=null, built=false, loopOn=false, io=null, mX=-1, mY=-1, rt=0;
+  let cur=0, sig=null, built=false, loopOn=false, io=null, mX=-1, mY=-1, rt=0, bootLen=0;
 
   function clearLinks(){
     cardLinks.forEach(c=>{c.card.removeEventListener('mouseenter',c.on);c.card.removeEventListener('mouseleave',c.off);c.card.classList.remove('nt-lit');});
@@ -1568,9 +1666,12 @@ document.addEventListener('mousemove', e => {
   // map a page-space y onto length along the (vertically monotonic) spine
   function lenAtY(y){let bl=0,bd=1e9;for(let i=0;i<samples.length;i++){const d=Math.abs(samples[i].y-y);if(d<bd){bd=d;bl=samples[i].l;}}return bl;}
 
+  // click/tap a node → smooth-scroll to whatever it represents
+  function jumpToSection(sec){ if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'}); }
+
   function makeNode(parent,x,y,r,opt){
     opt=opt||{};
-    const g=el('g',{class:'nd'+(opt.cls?' '+opt.cls:''),transform:'translate('+x.toFixed(1)+','+y.toFixed(1)+')'});
+    const g=el('g',{class:'nd'+(opt.cls?' '+opt.cls:'')+(opt.onActivate?' clickable':''),transform:'translate('+x.toFixed(1)+','+y.toFixed(1)+')'});
     const ndi=el('g',{class:'ndi'});
     ndi.appendChild(el('circle',{class:'halo',r:r}));
     ndi.appendChild(el('circle',{class:'ring',r:r}));
@@ -1580,6 +1681,9 @@ document.addEventListener('mousemove', e => {
     parent.appendChild(g);
     const rec={el:g,x:x,y:y,len:0,on:false,interactive:!!opt.interactive,final:!!opt.final,near:false};
     nodes.push(rec);
+    // real click target: an overlay button positioned in the same page-space
+    // coordinates, sitting above section content (see hitLayer note above)
+    if(opt.onActivate) makeHit(x,y,r+10,opt.onActivate,opt.ariaLabel||opt.label||'section',g);
     return rec;
   }
 
@@ -1588,6 +1692,7 @@ document.addEventListener('mousemove', e => {
     nodes=[]; samples=[]; contactNode=null;
     if(io){io.disconnect();io=null;}
     svg.innerHTML='';
+    hitLayer.innerHTML='';
 
     // measure full document height with the SVG collapsed so it can't inflate it
     svg.style.height='0px';
@@ -1652,7 +1757,7 @@ document.addEventListener('mousemove', e => {
       const s=p.s;
       const r = s.kind==='origin'||s.kind==='final'?8 : s.kind==='hub'?7 : 5.5;
       const cls = (s.kind==='final'?'final ':'')+(s.kind!=='dot'?'hub':'');
-      const cn=makeNode(nodeG,p.x,p.y,r,{cls:cls.trim(),interactive:true,final:s.kind==='final'});
+      const cn=makeNode(nodeG,p.x,p.y,r,{cls:cls.trim(),interactive:true,final:s.kind==='final',onActivate:()=>jumpToSection(p.sec),ariaLabel:s.nav});
       pushReveal(p.sec,cn.el);
       if(s.kind==='final') contactNode=cn;
 
@@ -1663,7 +1768,7 @@ document.addEventListener('mousemove', e => {
           const grp=el('g',{class:'bgrp'});
           grp.appendChild(el('path',{class:'branch',d:branchPath(p.x,p.y,cx,cy)}));
           branchG.appendChild(grp);
-          makeNode(grp,cx,cy,4.5,{label:c.l,interactive:true});
+          makeNode(grp,cx,cy,4.5,{label:c.l,interactive:true,onActivate:()=>jumpToSection(p.sec)});
           pushReveal(p.sec,grp);
         });
       }
@@ -1676,9 +1781,17 @@ document.addEventListener('mousemove', e => {
           const grp=el('g',{class:'bgrp'});
           grp.appendChild(el('path',{class:'branch',d:branchPath(p.x,p.y,nx,ny)}));
           branchG.appendChild(grp);
-          makeNode(grp,nx,ny,4.5,{interactive:false});
           const on =()=>{grp.classList.add('lit');card.classList.add('nt-lit');};
           const off=()=>{grp.classList.remove('lit');card.classList.remove('nt-lit');};
+          let jumpOffT=null;
+          const jump=()=>{
+            on();
+            card.scrollIntoView({behavior:'smooth',block:'center'});
+            clearTimeout(jumpOffT);
+            jumpOffT=setTimeout(off,1800);
+          };
+          const cardLabel=(card.querySelector('.pc-name,.ec-logo,h3')||card.querySelector(':scope > div:first-child')||{}).textContent;
+          makeNode(grp,nx,ny,4.5,{interactive:true,onActivate:jump,ariaLabel:cardLabel&&cardLabel.trim()});
           card.addEventListener('mouseenter',on);
           card.addEventListener('mouseleave',off);
           cardLinks.push({card:card,on:on,off:off});
@@ -1695,6 +1808,10 @@ document.addEventListener('mousemove', e => {
 
     // resolve each node's activation length along the spine
     nodes.forEach(n=>{n.len=lenAtY(n.y);});
+    // boot sequence: the spine always draws itself at least as far as the
+    // first hub (About) on arrival, signal and all — a system waking up,
+    // not a static launch. Harmless no-op once real scroll overtakes it.
+    bootLen = nodes[1] ? nodes[1].len : spineLen*0.08;
 
     built=true;
 
@@ -1718,7 +1835,8 @@ document.addEventListener('mousemove', e => {
   function frame(){
     if(built && spine){
       const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
-      const target=Math.min(1,Math.max(0,scrollY/max))*spineLen;
+      const scrollTarget=Math.min(1,Math.max(0,scrollY/max))*spineLen;
+      const target=Math.max(scrollTarget, bootLen);  // floor = boot sequence
       cur+=(target-cur)*0.12;                       // eased follow → premium feel
 
       spine.style.strokeDashoffset=(spineLen-cur);  // progressive draw
