@@ -115,9 +115,10 @@ nav::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-
 
 /* EXPERIENCE */
 #experience{padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
-.exp-bento{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:16px;margin-top:48px;}
+.exp-bento{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-top:48px;}
 .ec{padding:36px;cursor:pointer;}
 .ec.feat{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;min-height:400px;}
+.ec.wide{grid-column:span 2;}
 .ec-logo{font-family:'Clash Display',sans-serif;font-size:24px;font-weight:700;letter-spacing:-0.03em;color:var(--text);margin-bottom:6px;}
 .ec-role{font-size:13px;font-weight:600;color:var(--emerald);margin-bottom:20px;}
 .ec-desc{font-size:14.5px;color:var(--text-dim);line-height:1.7;}
@@ -131,14 +132,17 @@ nav::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-
 
 /* PROJECTS */
 #projects{padding:100px 48px;max-width:1360px;margin:0 auto;position:relative;z-index:1;}
-.pb{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:220px;gap:14px;margin-top:48px;}
+.pb{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(220px,auto);gap:14px;margin-top:48px;}
 .pc{padding:28px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;}
 .pc:nth-child(1){grid-column:span 5;grid-row:span 2;}
-.pc:nth-child(2){grid-column:span 4;}
-.pc:nth-child(3){grid-column:span 3;}
-.pc:nth-child(4){grid-column:span 4;}
-.pc:nth-child(5){grid-column:span 3;}
-.pc:nth-child(6){grid-column:span 4;}
+.pc:nth-child(2){grid-column:span 4;grid-row:span 2;}
+.pc:nth-child(3){grid-column:span 3;grid-row:span 2;}
+.pc:nth-child(4){grid-column:span 5;}
+.pc:nth-child(5){grid-column:span 4;}
+.pc:nth-child(6){grid-column:span 3;}
+.pc:nth-child(7){grid-column:span 4;}
+.pc:nth-child(8){grid-column:span 4;}
+.pc:nth-child(9){grid-column:span 4;}
 .pc-glow{position:absolute;inset:0;pointer-events:none;border-radius:var(--radius);}
 .pc-num{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--text-dimmer);text-transform:uppercase;}
 .pc-name{font-family:'Clash Display',sans-serif;font-size:clamp(16px,1.8vw,21px);font-weight:700;letter-spacing:-0.025em;color:var(--text);margin:10px 0 8px;line-height:1.2;}
@@ -191,7 +195,8 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
   #about{grid-template-columns:1fr;gap:48px;}
   .research-grid,.conf-grid{grid-template-columns:1fr;}
   .exp-bento{grid-template-columns:1fr;}
-  .ec.feat{min-height:auto;}
+  .ec.feat{min-height:auto;grid-row:span 1;}
+  .ec.wide{grid-column:span 1;}
   .pb{grid-template-columns:1fr;grid-auto-rows:auto;}
   .pc:nth-child(n){grid-column:span 1;grid-row:span 1;min-height:200px;}
   .rec-bento{grid-template-columns:repeat(2,1fr);}
@@ -277,14 +282,14 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
 <!-- ══════════ HERO ══════════ -->
 <section id="hero">
-  <div class="hero-eyebrow">AI Engineer &amp; Applied Researcher · Kolkata, India</div>
+  <div class="hero-eyebrow">AI Research Architect &amp; Applied Researcher · Kolkata, India</div>
 
   <h1 class="hero-name">
     <span class="name-word">Anwesh</span><br><span class="name-word ghost">Kabiraj</span>
   </h1>
 
   <p class="hero-sub">
-    Building explainable, scalable AI systems — from frontier research to real-world deployment. Specialising in medical image analysis, multimodal AI, and production LLM systems.
+    Building explainable, scalable AI systems — from frontier research to real-world deployment. Specialising in medical image analysis, physics-guided vision, and production LLM systems.
   </p>
 
   <div class="hero-actions">
@@ -313,10 +318,11 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
       </div>
     </div>
     <div class="gc hb-role">
-      <div style="font-size:11px;color:var(--text-dimmer);font-weight:700;letter-spacing:.1em;margin-bottom:8px">CURRENTLY</div>
-      <div style="font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.03em">AI Engineer / Researcher</div>
-      <div style="font-size:13px;color:var(--emerald);font-weight:700;margin-top:4px">@ TCS Innovation Labs</div>
-      <div style="font-size:13px;color:var(--text-dim);margin-top:10px;line-height:1.55">Medical AI · LLM Systems · Computer Vision</div>
+      <div style="font-size:11px;color:var(--text-dimmer);font-weight:700;letter-spacing:.1em;margin-bottom:10px">CURRENTLY · TWO POSTS</div>
+      <div style="font-family:'Clash Display',sans-serif;font-size:17px;font-weight:700;letter-spacing:-0.03em;line-height:1.25">AI Research Architect <span style="color:#06b6d4">@ GentracLabs</span></div>
+      <div style="height:1px;background:var(--border);margin:9px 0"></div>
+      <div style="font-family:'Clash Display',sans-serif;font-size:17px;font-weight:700;letter-spacing:-0.03em;line-height:1.25">AI Engineer / Researcher <span style="color:var(--emerald)">@ TCS Innovation Labs</span></div>
+      <div style="font-size:12.5px;color:var(--text-dim);margin-top:10px;line-height:1.55">Clinical Imaging · Colour Science · LLM Systems</div>
     </div>
     <div class="gc hb-years" style="position:relative;overflow:hidden;min-width:90px">
       <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(16,185,129,0.18),rgba(59,130,246,0.08),transparent 70%);animation:orbFloat 7s ease-in-out infinite"></div>
@@ -336,12 +342,16 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
   <div class="reveal">
     <div class="s-label">About</div>
     <h2 class="s-title">Research<br>meets<br><span class="d">production</span></h2>
-    <p class="about-p">I'm an AI Engineer and applied researcher at <strong>TCS Innovation Labs</strong> with 3+ years of experience translating novel architectures from research papers into systems that actually ship at scale.</p>
-    <p class="about-p">My work spans <strong>medical image analysis</strong>, weakly supervised deep learning, <strong>production LLM systems</strong>, generative models, and edge AI. Seven peer-reviewed publications across IEEE, Springer, and Elsevier — with two works currently under <strong>patent evaluation</strong>.</p>
+    <p class="about-p">I'm an applied researcher and engineer holding two posts at once — <strong>AI Research Architect at GentracLabs</strong> and <strong>AI Engineer / Researcher at TCS Innovation Labs</strong> — with 3+ years of experience translating novel architectures from research papers into systems that actually ship at scale.</p>
+    <p class="about-p">At GentracLabs I build the non-invasive clinical imaging stack: <strong>colour science</strong> that turns any phone camera into a measuring instrument, and screening models that carry the physics of light and tissue inside the training objective rather than leaving a network to rediscover it. At TCS the work spans <strong>production LLM systems</strong>, medical computer vision, weakly supervised deep learning, biometrics, and edge AI.</p>
+    <p class="about-p">Seven peer-reviewed publications across IEEE, Springer, and Elsevier — with two works currently under <strong>patent evaluation</strong>.</p>
     <p class="about-p">I care deeply about building AI that is explainable, efficient, and genuinely useful — not just benchmark-optimised.</p>
     <div class="about-tags">
       <span class="tag">Medical Image Analysis</span>
       <span class="tag">Computer Vision</span>
+      <span class="tag">Colour Science</span>
+      <span class="tag">Physics-Guided ML</span>
+      <span class="tag">Self-Supervised Learning</span>
       <span class="tag">LLM Systems</span>
       <span class="tag">RAG Pipelines</span>
       <span class="tag">Agentic AI</span>
@@ -356,6 +366,11 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
   </div>
   <div class="reveal" style="transition-delay:.12s">
     <div class="tl">
+      <div class="tl-item">
+        <div class="tl-yr">Jun 2026 — Present</div>
+        <div class="tl-t">AI Research Architect &amp; Developer · GentracLabs</div>
+        <div class="tl-s">Clinical Imaging · Colour Science · Physics-Guided ML</div>
+      </div>
       <div class="tl-item">
         <div class="tl-yr">Oct 2022 — Present</div>
         <div class="tl-t">AI Engineer / Researcher · TCS Innovation Labs</div>
@@ -401,10 +416,58 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 <section id="experience">
   <div class="reveal">
     <div class="s-label">Experience</div>
-    <h2 class="s-title">TCS Innovation<br><span class="d">Labs</span></h2>
+    <h2 class="s-title">Two labs.<br><span class="d">In parallel.</span></h2>
+    <p style="font-size:14px;color:var(--text-dimmer);margin-top:12px">Concurrent roles — clinical imaging research at GentracLabs, applied AI at TCS Innovation Labs.</p>
   </div>
 
   <div class="exp-bento reveal" style="transition-delay:.1s">
+
+    <div class="gc ec feat">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div style="width:34px;height:34px;background:linear-gradient(135deg,#10b981,#06b6d4);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <span style="font-size:13px;font-weight:900;color:#04211a">GL</span>
+          </div>
+          <div class="ec-logo" style="margin-bottom:0">GentracLabs</div>
+        </div>
+        <div class="ec-role">AI Research Architect &amp; Developer · Jun 2026 – Present</div>
+        <p class="ec-desc">Architect and builder of the non-invasive clinical imaging stack — screening disease from an ordinary photograph rather than a blood draw. Three end-to-end systems delivered inside the first months: a physics-based colour-rectification engine, a neonatal jaundice screener, and an ocular anemia screener. The through-line is that the optics live inside the method — light transport and tissue reflectance shape the objective itself, instead of being left for a network to rediscover from data.</p>
+        <div class="ec-tags">
+          <span class="tag">Colour Science</span><span class="tag">Physics-Guided ML</span>
+          <span class="tag">Self-Supervised</span><span class="tag">Segmentation</span>
+          <span class="tag">RAW / DNG</span><span class="tag">PyTorch</span>
+          <span class="tag">CIE Lab</span><span class="tag">Clinical AI</span>
+        </div>
+      </div>
+      <div>
+        <div class="ec-metrics">
+          <div>
+            <div class="ec-mv">3</div>
+            <div class="ec-ml">Systems delivered</div>
+          </div>
+          <div>
+            <div class="ec-mv">2.4&times;</div>
+            <div class="ec-ml">Colour-error cut</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gc ec">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:#06b6d4;text-transform:uppercase;margin-bottom:12px">Colour Science &amp; Device Physics</div>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.65">Built <strong style="color:var(--text)">NormaEngine</strong> — no neural network anywhere, only optics and linear algebra. Ambient subtraction from a flash/no-flash RAW pair, an exposure-invariant root-polynomial CCM into CIE XYZ/Lab, and a per-sensor profile registry so any phone becomes a measuring instrument.</p>
+      <div style="margin-top:16px;font-size:12px;font-weight:600;color:var(--text-dimmer)">A consistency gate refuses the reading rather than guessing it</div>
+    </div>
+
+    <div class="gc ec">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:#f59e0b;text-transform:uppercase;margin-bottom:12px">Physics-Guided Learning</div>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.65">Neonatal jaundice from a whole-body photograph. Melanin and bilirubin scatter light differently, so that difference is written into the <strong style="color:var(--text)">training objective</strong> — forcing the model to separate skin tone from bilirubin instead of correlating with it.</p>
+    </div>
+
+    <div class="gc ec wide" style="background:var(--emerald-dim);border-color:rgba(16,185,129,0.18)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--emerald);text-transform:uppercase;margin-bottom:12px">◆ Ocular Screening at Scale</div>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.65">Haemoglobin estimated from conjunctival pallor, then thresholded against <strong style="color:var(--text)">WHO cutoffs by sex and age</strong> — regressing first and classifying second is what holds the model steady across cohorts at 72% and 19% anemia prevalence. SimCLR self-supervised pretraining on unlabelled crops, using pallor-preserving augmentations only, hardens the encoder against capture conditions. <strong style="color:var(--text)">Cross-site AUC 0.90</strong>, training in India and testing in Italy.</p>
+    </div>
 
     <div class="gc ec feat">
       <div>
@@ -430,7 +493,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
             <div class="ec-ml">Patents pending</div>
           </div>
           <div>
-            <div class="ec-mv">18×</div>
+            <div class="ec-mv">18&times;</div>
             <div class="ec-ml">Latency reduction</div>
           </div>
         </div>
@@ -438,7 +501,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
     </div>
 
     <div class="gc ec">
-      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--emerald);text-transform:uppercase;margin-bottom:12px">Generative AI & LLMs</div>
+      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--emerald);text-transform:uppercase;margin-bottom:12px">Generative AI &amp; LLMs</div>
       <p style="font-size:13px;color:var(--text-dim);line-height:1.65">Architected an enterprise Hybrid RAG pipeline for Passport Seva policy intelligence using <strong style="color:var(--text)">GPT-5.4 Pro / DeepSeek-V3</strong>, NV-Embed-v2 embeddings, Qdrant vector DB, and Qwen3-Reranker-8B. Integrated Lakera Guard, FSDP2, and vLLM PagedAttention for production-grade GenAI.</p>
       <div style="margin-top:16px;font-size:12px;font-weight:600;color:var(--text-dimmer)">Built agentic form automation: RAG → LLM → JSON → React Hook Form</div>
     </div>
@@ -448,8 +511,8 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
       <p style="font-size:13px;color:var(--text-dim);line-height:1.65">Integrated multimodal biometrics (fingerprint, signature, facial) into <strong style="color:var(--text)">Passport Seva</strong> with UIDAI/Aadhaar real-time auth. Built <strong style="color:var(--text)">DigiYatra</strong> facial recognition for seamless airport check-in with biometric tokenization at scale.</p>
     </div>
 
-    <div class="gc ec" style="background:var(--emerald-dim);border-color:rgba(16,185,129,0.18)">
-      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--emerald);text-transform:uppercase;margin-bottom:12px">⚗ Patent-Track CV & NLP</div>
+    <div class="gc ec wide" style="background:var(--emerald-dim);border-color:rgba(16,185,129,0.18)">
+      <div style="font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--emerald);text-transform:uppercase;margin-bottom:12px">⚗ Patent-Track CV &amp; NLP</div>
       <p style="font-size:13px;color:var(--text-dim);line-height:1.65"><strong style="color:var(--text)">Segmentation:</strong> Lightweight encoder-decoder with boundary-aware loss · 91% mIoU · generalised to 3 domains<br><br><strong style="color:var(--text)">NER Pipeline:</strong> SpaCy on 120K+ logistics docs · 89% F1 · 180ms → 10ms (18× via quantization + x86 export)</p>
     </div>
 
@@ -594,9 +657,51 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
   <div class="pb reveal" style="transition-delay:.1s">
 
     <div class="gc pc">
+      <div class="pc-glow" style="background:radial-gradient(circle at 70% 20%,rgba(6,182,212,0.16),transparent 55%)"></div>
+      <div>
+        <div class="pc-num">01 / GentracLabs · Featured</div>
+        <div class="pc-name">NormaEngine — Device-Independent Colour</div>
+        <p class="pc-desc">Colour rectification for clinical imaging with no neural network anywhere — only optics and linear algebra. A flash/no-flash RAW pair cancels the ambient light, an exposure-invariant root-polynomial CCM maps the now-known flash illuminant into CIE XYZ/Lab, and a per-sensor profile registry pools spectrophotometer-calibrated sessions so any smartphone reports true tissue colour rather than its own interpretation of it. Where a capture cannot support a trustworthy reading, a consistency gate refuses it instead of guessing.<br><br>Real-world cross-device error: mean ΔE2000 <strong style="color:var(--text)">14.2 → 5.9</strong> across 600 measurements — 6 phones × 5 lighting conditions; ΔE2000 &lt; 2 on the controlled path.</p>
+      </div>
+      <div>
+        <div class="pc-tech"><span>RAW / DNG</span><span>CIE Lab · ΔE2000</span><span>Root-Poly CCM</span><span>Bradford CAT</span><span>NumPy / SciPy</span><span>Patient Ref. Card</span></div>
+        <div style="font-size:12px;color:#06b6d4;font-weight:700;margin-top:12px">◆ Delivered @ GentracLabs · Physics, not AI</div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+    <div class="gc pc">
+      <div class="pc-glow" style="background:radial-gradient(circle at 25% 80%,rgba(245,158,11,0.13),transparent 55%)"></div>
+      <div>
+        <div class="pc-num">02 / GentracLabs</div>
+        <div class="pc-name">Neonatal Jaundice Screening</div>
+        <p class="pc-desc">Screens newborns for jaundice from a whole-body photograph. The novelty is physical rather than architectural: melanin and bilirubin absorb and scatter light differently, and that optical difference is written into the training objective itself — so the model is forced to separate skin tone from bilirubin instead of quietly correlating with it. A cephalocaudal bilirubin field is fitted per infant, matching the head-to-toe progression clinicians already grade by, with illuminant normalisation and causal disentanglement upstream.</p>
+      </div>
+      <div>
+        <div class="pc-tech"><span>PyTorch</span><span>Physics-Guided Loss</span><span>Causal Disentanglement</span><span>Illuminant Normalisation</span></div>
+        <div style="font-size:12px;color:#f59e0b;font-weight:700;margin-top:12px">◆ Delivered @ GentracLabs · Patent-track</div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+    <div class="gc pc">
+      <div class="pc-glow" style="background:radial-gradient(circle at 50% 30%,rgba(236,72,153,0.12),transparent 55%)"></div>
+      <div>
+        <div class="pc-num">03 / GentracLabs</div>
+        <div class="pc-name">Ocular Anemia Detection</div>
+        <p class="pc-desc">Estimates haemoglobin from the pallor of the eye's conjunctiva, then flags anemia against WHO cutoffs stratified by sex and age. Regressing Hgb and thresholding afterwards — rather than classifying directly — is what keeps it stable across cohorts with 72% and 19% anemia prevalence. SimCLR self-supervised pretraining on unlabelled crops — pallor-preserving augmentations only — hardens the encoder against capture conditions.<br><br>Cross-site AUC <strong style="color:var(--text)">0.90</strong>, training in India and testing in Italy.</p>
+      </div>
+      <div>
+        <div class="pc-tech"><span>PyTorch</span><span>SegFormer</span><span>SimCLR SSL</span><span>Gradient Boosting</span></div>
+        <div style="font-size:12px;color:#ec4899;font-weight:700;margin-top:12px">◆ Delivered @ GentracLabs</div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </div>
+
+    <div class="gc pc">
       <div class="pc-glow" style="background:radial-gradient(circle at 75% 25%,rgba(16,185,129,0.15),transparent 55%)"></div>
       <div>
-        <div class="pc-num">01 / Featured</div>
+        <div class="pc-num">04 / TCS · Featured</div>
         <div class="pc-name">Hybrid RAG · Passport Seva Intelligence</div>
         <p class="pc-desc">Enterprise-grade policy Q&A system. Contextual semantic chunking, metadata-aware retrieval, Qwen3-Reranker-8B reranking. Integrated Lakera Guard (prompt injection) + vLLM PagedAttention for low-latency production deployment. Significantly reduced hallucinations in long-context policy queries.</p>
       </div>
@@ -610,7 +715,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
     <div class="gc pc">
       <div class="pc-glow" style="background:radial-gradient(circle at 20% 80%,rgba(59,130,246,0.12),transparent 55%)"></div>
       <div>
-        <div class="pc-num">02</div>
+        <div class="pc-num">05</div>
         <div class="pc-name">CAPCAM — Chest X-Ray AI</div>
         <p class="pc-desc">Weakly supervised multi-disease localization across 13 thoracic pathologies. 94% IoBB, 90% Dice on NIH + CheXpert. Published in Elsevier BSPC 2024.</p>
       </div>
@@ -621,7 +726,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
     <div class="gc pc">
       <div class="pc-glow" style="background:radial-gradient(circle at 50% 50%,rgba(168,85,247,0.1),transparent 55%)"></div>
       <div>
-        <div class="pc-num">03</div>
+        <div class="pc-num">06</div>
         <div class="pc-name">DigiYatra Biometrics</div>
         <p class="pc-desc">Facial recognition for airport check-in. Biometric tokenization with cross-verification against Aadhaar/UIDAI at scale. Reduced manual verification overhead significantly.</p>
       </div>
@@ -632,7 +737,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
     <div class="gc pc">
       <div class="pc-glow" style="background:radial-gradient(circle at 80% 20%,rgba(245,158,11,0.1),transparent 55%)"></div>
       <div>
-        <div class="pc-num">04 / Patent</div>
+        <div class="pc-num">07 / Patent</div>
         <div class="pc-name">Edge NER Pipeline</div>
         <p class="pc-desc">SpaCy NER trained on 120K+ logistics documents. 89% F1 across 8 entity types. Quantized for x86 edge: 180ms → 10ms inference. Eliminates cloud API dependency.</p>
       </div>
@@ -642,7 +747,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
     <div class="gc pc">
       <div>
-        <div class="pc-num">05 / Patent</div>
+        <div class="pc-num">08 / Patent</div>
         <div class="pc-name">Facial Segmentation</div>
         <p class="pc-desc">Lightweight encoder-decoder with boundary-aware loss. 91% mIoU on facial benchmarks, generalised across 3 additional domains.</p>
       </div>
@@ -652,7 +757,7 @@ footer{position:relative;z-index:1;padding:28px 48px;border-top:1px solid var(--
 
     <div class="gc pc">
       <div>
-        <div class="pc-num">06</div>
+        <div class="pc-num">09</div>
         <div class="pc-name">SARIMA Billing Forecaster</div>
         <p class="pc-desc">10+ years of billing data. Real-time anomaly monitoring with tiered alerting (10L early warning / 50L critical) for enterprise-scale financial deviation detection.</p>
       </div>
