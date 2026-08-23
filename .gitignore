@@ -1,1 +1,9 @@
+# macOS
+.DS_Store
+
+# editor / local agent notes
 CLAUDE.md
+AGENTS.md
+
+# misc
+*.pem
