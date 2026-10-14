@@ -4,13 +4,14 @@ import { ProjectRow } from '../components/Rows'
 import { projects, trackLabel, type Track } from '../data/projects'
 import { usePageTitle } from '../hooks'
 
-const filters: (Track | 'all')[] = ['all', 'gentraclabs', 'tcs']
+const tracks = Object.keys(trackLabel) as Track[]
+const filters: (Track | 'all')[] = ['all', ...tracks]
 
 export default function Projects() {
   usePageTitle('Projects')
   const [params, setParams] = useSearchParams()
   const raw = params.get('track')
-  const track: Track | 'all' = raw === 'gentraclabs' || raw === 'tcs' ? raw : 'all'
+  const track: Track | 'all' = tracks.find((t) => t === raw) ?? 'all'
   const list = track === 'all' ? projects : projects.filter((p) => p.track === track)
 
   return (
@@ -19,7 +20,8 @@ export default function Projects() {
         <Display as="h1" top="Selected" bottom="Builds" />
         <Reveal delay={0.15}>
           <p className="lead">
-            {projects.length} systems across clinical-imaging research at GentracLabs and production AI at TCS Innovation Labs.
+            {projects.length} systems across clinical-imaging research at GentracLabs, production AI at TCS Innovation Labs and
+            chest X-ray research at Jio Institute.
           </p>
         </Reveal>
       </section>

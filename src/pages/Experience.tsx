@@ -16,7 +16,8 @@ export default function Experience() {
         <Display as="h1" top={`${stats.years}+ Years of`} bottom="Experience" />
         <Reveal delay={0.15}>
           <p className="lead">
-            Two posts held in parallel: clinical-imaging research at GentracLabs and applied AI at TCS Innovation Labs.
+            Two posts held in parallel: co-founder of GentracLabs, building its clinical-imaging research, and applied AI at TCS
+            Innovation Labs.
           </p>
         </Reveal>
       </section>

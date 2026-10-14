@@ -1,7 +1,22 @@
-export type Track = 'gentraclabs' | 'tcs'
+export type Track = 'gentraclabs' | 'tcs' | 'jio'
 
 /** Which generative cover to draw for a project. See components/ProjectCover.tsx. */
-export type CoverKind = 'chart' | 'bilirubin' | 'iris' | 'graph' | 'xray' | 'face' | 'tokens' | 'mask' | 'wave'
+export type CoverKind =
+  | 'chart'
+  | 'bilirubin'
+  | 'iris'
+  | 'graph'
+  | 'xray'
+  | 'face'
+  | 'tokens'
+  | 'mask'
+  | 'wave'
+  | 'enrol'
+  | 'squeeze'
+  | 'tap'
+  | 'wall'
+  | 'booklet'
+  | 'clauses'
 
 export type Project = {
   slug: string
@@ -69,6 +84,23 @@ export const projects: Project[] = [
     year: '2026',
   },
   {
+    slug: 'dgca-policy-matcher',
+    title: 'Policy Matcher · DGCA',
+    kicker: 'Multi-agent compliance matching on Bedrock',
+    track: 'tcs',
+    badge: 'Multi-agent · Bedrock',
+    summary:
+      "Matches third-party vendors' terms against the aviation regulator's policy: full, partial or no match, rolled into one priority-weighted score.",
+    body: [
+      "Built for DGCA, India's civil aviation regulator. Policy documents live in Amazon S3; LlamaParse turns them into clean, structured text, which is embedded and indexed in an Amazon Bedrock Knowledge Base for retrieval.",
+      'When a third-party vendor submits its terms, an orchestrator agent on Claude Sonnet coordinates three specialist agents that check every clause against the policy corpus two ways: lexical matching for exact wording, and semantic, intent-level matching for clauses that say the same thing in different words.',
+      'Each clause lands in one of three buckets (fully matched, partially matched, not matched) in an operator UI built for fast review, then is weighted against a priority list into a single match score. The operator makes the final call on one number, with the clause-level evidence right beside it.',
+    ],
+    result: 'One priority-weighted compliance score per vendor submission, backed by full / partial / no-match evidence for every clause.',
+    stack: ['Amazon Bedrock', 'Claude Sonnet', 'Bedrock Knowledge Bases', 'Amazon S3', 'LlamaParse', 'Multi-agent orchestration', 'Lexical + semantic matching'],
+    cover: 'clauses',
+  },
+  {
     slug: 'hybrid-rag-passport-seva',
     title: 'Hybrid RAG · Passport Seva',
     kicker: 'Policy intelligence',
@@ -84,19 +116,76 @@ export const projects: Project[] = [
     cover: 'graph',
   },
   {
-    slug: 'capcam',
-    title: 'CAPCAM',
-    kicker: 'Chest X-ray AI',
+    slug: 'passport-seva-enrolment',
+    title: 'Enrolment Stack · Passport Seva',
+    kicker: 'Paperless capture at the counter',
     track: 'tcs',
-    summary: 'Weakly supervised multi-disease localisation across 13 thoracic pathologies.',
+    badge: '6–7 min → 30 s',
+    summary: 'The full IoT capture setup behind every application: face, signature, fingerprints and documents, all digital.',
     body: [
-      'A Confidence-Aware Probabilistic Class Activation Map localises 13 thoracic diseases in chest X-rays without bounding-box annotations.',
-      'Published in Elsevier Biomedical Signal Processing & Control, 2024.',
+      'Architected and delivered the complete IoT environment at the application counter: camera capture with automated ICAO 9303 / ISO/IEC 19794-5 face-image compliance checks, digital signature capture, digital fingerprint capture and a document scanner.',
+      'It took paper out of every step. Thumb impressions used to be inked on paper and scanned afterwards, and supporting documents were photocopied; now each one is captured digitally, straight into the application, cutting a huge volume of printing and paper waste.',
     ],
-    result: '94% IoBB and 90% Dice on NIH + CheXpert.',
-    stack: ['PyTorch', 'CAM', 'Saliency Maps'],
-    cover: 'xray',
-    year: '2024',
+    result: 'Per-applicant capture time cut from 6–7 minutes to about 30 seconds.',
+    stack: ['IoT devices', 'ICAO 9303', 'ISO/IEC 19794-5', 'Fingerprint scanner', 'Signature pad', 'Document scanner'],
+    cover: 'enrol',
+  },
+  {
+    slug: 'passport-seva-compression',
+    title: 'Compression Suite · Passport Seva',
+    kicker: 'Three purpose-built codecs',
+    track: 'tcs',
+    badge: 'Up to 10× smaller',
+    summary: 'Three compression algorithms for photos, scanned PDFs and fingerprints, shrinking each 7–10×.',
+    body: [
+      'Wrote three compression algorithms, one for each kind of data the platform stores: applicant images, scanned PDF documents, and biometric fingerprints converted to WSQ, the FBI-standard wavelet codec for fingerprint images.',
+      'Smaller payloads everywhere: an enormous amount of server storage saved, and far faster syncing between the primary data centre and the disaster-recovery site.',
+    ],
+    result: 'Images ≈8× smaller, scanned PDFs ≈7×, fingerprints (WSQ) ≈10×.',
+    stack: ['Image compression', 'PDF compression', 'WSQ (FBI standard)', 'DC–DR sync'],
+    cover: 'squeeze',
+  },
+  {
+    slug: 'passport-seva-payments',
+    title: 'Digital Payments · Passport Seva',
+    kicker: 'Cashless at the counter',
+    track: 'tcs',
+    summary: 'A payment machine wired into the application flow: debit and credit cards, QR, NFC and UPI.',
+    body: [
+      'Architected and implemented a payment machine integrated with the Passport Seva application, so applicants can pay digitally by debit card, credit card, QR code, NFC tap or UPI.',
+      'Fast, fully digital payments with no cash changing hands, built to shut out fraud and keep every transaction secure.',
+    ],
+    stack: ['Payment terminal', 'Debit & credit cards', 'UPI QR', 'NFC'],
+    cover: 'tap',
+  },
+  {
+    slug: 'passport-print-qc',
+    title: 'Print & Verify · Passport Seva',
+    kicker: 'ICAO 9303 personalisation & verification',
+    track: 'tcs',
+    badge: 'Manual QC → automated',
+    summary: 'Drove the personalisation printers and automated QC: the eMRTD chip verified against MRZ, barcode, LSI token and ghost image.',
+    body: [
+      'Personalisation: owned everything at the physical level of the passport printers, from the inputs each printer needs and the data-page formatting to hardware error handling, and passed clean job and device status up to the operator application.',
+      'Quality check: replaced a manual inspection that had been open to fraud with automated ICAO 9303 verification. A passport reader pulls the eMRTD chip data and matches it against everything printed on the data page: the MRZ, the barcode data, the LSI token and the ghost image. Passive authentication then confirms the chip\'s keys and hash values, and each passport is ruled a pass, a fail or a flag for human review.',
+      'Scope: the device and verification layer was mine; the application screens that show these results were built by another team.',
+    ],
+    stack: ['ICAO 9303', 'eMRTD chip', 'Passive authentication', 'MRZ', 'Barcode match', 'LSI token', 'Ghost image', 'Personalisation printers'],
+    cover: 'booklet',
+  },
+  {
+    slug: 'firewall-access-console',
+    title: 'Firewall Access Console',
+    kicker: 'LDAP access control, without the shell',
+    track: 'tcs',
+    summary: 'A MERN app that turned a day of risky firewall CLI work into a few clicks for the network team.',
+    body: [
+      "Passport Seva's infrastructure firewall is tied to every user's LDAP account. Revoking access or acting on a user meant running Bash scripts and proprietary commands by hand on the Linux VM hosting the firewall, where one changed command could ripple across the whole system.",
+      'Built a MERN application tightly integrated with the firewall APIs, behind a friendly UI: people sign in with their own LDAP credentials and, depending on their privileges, take the available actions on other LDAP accounts.',
+    ],
+    result: 'Work that took experienced engineers a whole day became something a newcomer to the network team could do.',
+    stack: ['MongoDB', 'Express', 'React', 'Node.js', 'LDAP', 'Firewall APIs'],
+    cover: 'wall',
   },
   {
     slug: 'digiyatra',
@@ -153,9 +242,25 @@ export const projects: Project[] = [
     stack: ['SARIMA', 'Time Series', 'Anomaly Detection'],
     cover: 'wave',
   },
+  {
+    slug: 'capcam',
+    title: 'CAPCAM',
+    kicker: 'Chest X-ray AI',
+    track: 'jio',
+    summary: 'Weakly supervised multi-disease localisation across 13 thoracic pathologies.',
+    body: [
+      'A Confidence-Aware Probabilistic Class Activation Map localises 13 thoracic diseases in chest X-rays without bounding-box annotations.',
+      'Built at Jio Institute. The early framework appeared at IEEE IRI 2023 and the full method in Elsevier Biomedical Signal Processing & Control, 2024.',
+    ],
+    result: '94% IoBB and 90% Dice on NIH + CheXpert.',
+    stack: ['PyTorch', 'CAM', 'Saliency Maps'],
+    cover: 'xray',
+    year: '2022',
+  },
 ]
 
 export const trackLabel: Record<Track, string> = {
   gentraclabs: 'GentracLabs',
   tcs: 'TCS Innovation Labs',
+  jio: 'Jio Institute',
 }

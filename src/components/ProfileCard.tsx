@@ -43,7 +43,7 @@ export function ProfileCard({ compact = false }: { compact?: boolean }) {
   const live = cover && !reduce
   const { scrollY } = useScroll()
   const drift = useTransform(scrollY, (v) => v * 0.35)
-  const fade = useTransform(scrollY, (v) => 1 - Math.min(v / (window.innerHeight * 0.9), 1) * 0.7)
+  const fade = useTransform(scrollY, (v) => 1 - Math.min(v / Math.max(window.innerHeight * 0.9, 1), 1) * 0.7)
   const tilt = useTilt(live)
 
   return (

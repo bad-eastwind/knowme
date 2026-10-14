@@ -22,7 +22,7 @@ export const roles: Role[] = [
     id: 'gentraclabs',
     org: 'GentracLabs',
     orgShort: 'GL',
-    title: 'AI Research Architect & Developer',
+    title: 'Co-founder · AI Research Architect & Developer',
     start: 'Jun 2026',
     end: null,
     summary:
@@ -59,7 +59,7 @@ export const roles: Role[] = [
     location: 'Kolkata',
     summary:
       'Working across the full AI stack, from publishing novel architectures in peer-reviewed venues to deploying them in production systems used by millions. Focus areas: generative AI pipelines, medical computer vision, biometric identity systems, NLP and edge AI.',
-    focus: ['PyTorch', 'LLM Systems', 'RAG', 'Computer Vision', 'Biometrics', 'Edge AI', 'FastAPI', 'React'],
+    focus: ['PyTorch', 'LLM Systems', 'RAG', 'Computer Vision', 'Biometrics', 'IoT', 'Edge AI', 'Amazon Bedrock', 'FastAPI', 'React', 'MERN'],
     metrics: [
       { value: '2', label: 'Patents pending' },
       { value: '18×', label: 'Latency reduction' },
@@ -68,7 +68,11 @@ export const roles: Role[] = [
     highlights: [
       {
         title: 'Generative AI & LLMs',
-        body: 'An enterprise Hybrid RAG pipeline for Passport Seva policy intelligence on GPT-5.4 Pro / DeepSeek-V3, NV-Embed-v2, Qdrant and Qwen3-Reranker-8B, with Lakera Guard, FSDP2 and vLLM PagedAttention. Plus agentic form automation: RAG → LLM → JSON → React Hook Form.',
+        body: 'Most recently, a multi-agent policy matcher for DGCA on Amazon Bedrock: an orchestrator and three Claude Sonnet agents match vendor terms to regulatory policy (LlamaParse, Bedrock Knowledge Bases, lexical + semantic matching) and roll the result into one priority-weighted score. Before that, an enterprise Hybrid RAG pipeline for Passport Seva policy intelligence on GPT-5.4 Pro / DeepSeek-V3, NV-Embed-v2, Qdrant and Qwen3-Reranker-8B, with Lakera Guard, FSDP2 and vLLM PagedAttention. Plus agentic form automation: RAG → LLM → JSON → React Hook Form.',
+      },
+      {
+        title: 'Passport Seva platform',
+        body: 'Architected the paperless IoT capture stack at the counter (ICAO-compliant face capture, signature, fingerprints, documents), cutting capture from 6–7 minutes to about 30 seconds. Wrote three compression algorithms (images ≈8×, scanned PDFs ≈7×, fingerprints to WSQ ≈10×) that saved huge storage and sped up DC–DR sync, built the in-app payment machine for cards, QR, NFC and UPI, and a MERN + LDAP firewall console that made a day of CLI work self-serve. Also owned the hardware layer for passport personalisation and the automated ICAO 9303 quality check: eMRTD chip data matched against MRZ, barcode, LSI token and ghost image, with passive authentication.',
       },
       {
         title: 'Biometric systems',
@@ -89,6 +93,7 @@ export const roles: Role[] = [
     start: 'Jan 2022',
     end: 'Jul 2022',
     location: 'Navi Mumbai',
+    summary: 'Built CAPCAM, weakly supervised chest X-ray localisation, later published in Elsevier BSPC',
     focus: [],
     major: false,
   },
