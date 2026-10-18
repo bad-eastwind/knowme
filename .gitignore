@@ -26,6 +26,8 @@ dist-ssr
 # local agent notes
 CLAUDE.md
 AGENTS.md
+DESIGN.md
+.claude/
 
 # misc
 *.pem

@@ -219,6 +219,11 @@
     width: 64px;
     border-radius: 14px;
   }
+  .pcard--compact .pcard__portrait img {
+    /* the portrait is a head-and-shoulders crop; at 64px, zoom in so the face carries the strip */
+    transform: scale(1.45);
+    transform-origin: 60% 44%;
+  }
   .pcard--compact .pcard__mono {
     font-size: 26px;
   }
@@ -281,7 +286,7 @@
   height: 100%;
 }
 .pcard--cover .pcard__portrait img {
-  object-position: 50% 20%;
+  object-position: 60% 20%; /* the face sits right of centre in portrait-tall.jpg; keep it clear of the edge */
 }
 .pcard--cover .pcard__portrait::after {
   content: '';

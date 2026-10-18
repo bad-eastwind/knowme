@@ -46,6 +46,28 @@ export default function ProjectDetail() {
         ))}
       </Reveal>
 
+      {p.sections?.map((s) => (
+        <Reveal as="section" className="detail__section" key={s.title}>
+          <h2 className="eyebrow">{s.title}</h2>
+          {s.body?.map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+          {s.points ? (
+            <ol className="facets">
+              {s.points.map((pt, i) => (
+                <li className="facet" key={pt.label}>
+                  <span className="facet__n">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3 className="facet__label">{pt.label}</h3>
+                    <p className="facet__text">{pt.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          ) : null}
+        </Reveal>
+      ))}
+
       {p.result ? (
         <Reveal className="result">
           <div className="result__l">Result</div>

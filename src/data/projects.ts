@@ -18,6 +18,16 @@ export type CoverKind =
   | 'booklet'
   | 'clauses'
 
+/**
+ * Optional deeper write-up shown under the body on the detail page. Only for projects with
+ * genuinely distinct parts; most projects need none. `points` renders as a numbered list.
+ */
+export type ProjectSection = {
+  title: string
+  body?: string[]
+  points?: { label: string; text: string }[]
+}
+
 export type Project = {
   slug: string
   title: string
@@ -27,6 +37,7 @@ export type Project = {
   badge?: string
   summary: string
   body: string[]
+  sections?: ProjectSection[]
   result?: string
   stack: string[]
   cover: CoverKind
@@ -44,12 +55,62 @@ export const projects: Project[] = [
     badge: 'Physics, not AI',
     summary: 'Clinical colour rectification with no neural network anywhere, only optics and linear algebra.',
     body: [
-      'A flash/no-flash RAW pair cancels the ambient light. An exposure-invariant root-polynomial CCM then maps the now-known flash illuminant into CIE XYZ/Lab, and a per-sensor profile registry pools spectrophotometer-calibrated sessions, so any smartphone reports true tissue colour rather than its own interpretation of it.',
-      'Where a capture cannot support a trustworthy reading, a consistency gate refuses it instead of guessing.',
+      "A colour-rectification engine for non-invasive clinical AI. It turns the camera-native RGB of an eye photograph into CIE XYZ/Lab, so anemia and jaundice models read true tissue colour rather than each phone's own interpretation of it.",
+      'Exposure-invariant root-polynomial CCMs are fitted per device from spectrophotometer-calibrated sessions and pooled in a per-sensor profile registry. A phone with no exact profile is matched by sensor fingerprint, and the result is labelled lower-trust.',
+    ],
+    sections: [
+      {
+        title: 'Three ways in',
+        points: [
+          {
+            label: 'RAW flash/no-flash pair',
+            text: 'The reference path. Exposure-normalised subtraction of the ambient frame, strictly in linear space, leaves the flash as the only light: a known illuminant. The device CCM then maps the capture to absolute Lab.',
+          },
+          {
+            label: 'Ambient RAW + NormaCard',
+            text: 'No flash, so a reference card beside the eye measures the light instead. Its patches fit three von Kries gains on top of the device CCM, or a full 3×3 when the phone has no profile.',
+          },
+          {
+            label: 'JPEG + NormaCard',
+            text: "The degraded fallback for phones without RAW. The card's neutral ramp recovers the phone's global tone curve and inverts it before the same card correction runs. Clipped, non-monotonic or locally tone-mapped images are refused.",
+          },
+        ],
+      },
+      {
+        title: 'Refuse, never guess',
+        body: [
+          'The order of trust is fixed: control the light, else measure it, never estimate it. Every capture is gated on the ambient-to-flash ratio, the corneal catchlight against the white point, scleral chroma (skipped for jaundice, where a yellow sclera is the signal) and clipping judged on the source frames. A NaN fails closed.',
+          'A refusal is a structured result with its reasons, not an exception: every sample comes back ok, provisional, relative or refused. An override can relax tolerances, but never accept an unverified card, an expired print batch or an empty region. Calibration is gated the same way, so a blurred chart, bad geometry, clipped patches or high residuals stop a profile from ever being written.',
+        ],
+      },
+      {
+        title: 'NormaCard v8',
+        body: [
+          "A small printed reference card designed at GentracLabs. Ten of its twelve patches sit on the colours the models care about (conjunctival pallor, scleral icterus, nail-bed tones), beside a six-step neutral ramp that is the card's only white point.",
+          'The engine finds the card on its own: ArUco fiducials give its pose, a printed QR confirms the revision, and every patch is read by position. A mirrored, bent, duplicated, under-resolved or unverifiable card is refused outright. Truth is measured per print batch with a spectrophotometer and carries an expiry, so an aged card cannot pass for a fresh one.',
+        ],
+      },
+      {
+        title: 'Next',
+        body: [
+          'The Python implementation is the reference and the test oracle. Next come an Android Camera2 RAW capture app, real flash/no-flash pairs and an illuminant-robustness study, then freezing the method for an on-device Rust port.',
+        ],
+      },
     ],
     result:
       'Real-world cross-device error: mean ΔE2000 14.2 → 5.9 across 600 measurements (6 phones × 5 lighting conditions); ΔE2000 < 2 on the controlled path.',
-    stack: ['RAW / DNG', 'CIE Lab · ΔE2000', 'Root-Poly CCM', 'Bradford CAT', 'NumPy / SciPy', 'Patient Ref. Card'],
+    stack: [
+      'RAW / DNG',
+      'CIE Lab · ΔE2000',
+      'Root-Poly CCM',
+      'Bradford CAT',
+      'von Kries',
+      'Tone-curve inversion',
+      'ArUco + QR',
+      'NumPy / SciPy',
+      'OpenCV',
+      'NormaCard v8',
+    ],
     cover: 'chart',
     year: '2026',
   },
